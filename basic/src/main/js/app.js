@@ -22,7 +22,10 @@ class App extends React.Component { // <1>
 
 	render() { // <3>
 		return (
-			<EmployeeList employees={this.state.employees}/>
+			<div>
+				<EmployeeList employees={this.state.employees}/>
+				<Login/>
+			</div>
 		)
 	}
 }
@@ -63,6 +66,28 @@ class Employee extends React.Component{
 	}
 }
 // end::employee[]
+
+class Login extends React.Component{
+	render() {
+		return (
+			<div>
+				<div>
+				<label>Username:</label>
+				<input/>
+				</div>
+				<div>
+				<label>Email:</label>
+				<input/>
+				</div>
+				<div>
+				<label>Password:</label>
+				<input/>
+				</div>
+			</div>
+
+		)
+	}
+}
 
 // tag::render[]
 ReactDOM.render(
