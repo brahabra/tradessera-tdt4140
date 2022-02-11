@@ -11,31 +11,48 @@ class App extends React.Component { // <1>
 
 	constructor(props) {
 		super(props);
-		this.state = {employees: []};
+		this.state = {users: []};
 	}
 
 	componentDidMount() { // <2>
-		client({method: 'GET', path: '/api/employees'}).done(response => {
-			this.setState({employees: response.entity._embedded.employees});
+		client({method: 'GET', path: '/api/users'}).done(response => {
+			this.setState({users: response.entity._embedded.users});
 		});
 	}
 
 	render() { // <3>
 		return (
 			<div>
-				<EmployeeList employees={this.state.employees}/>
+				<UserList users={this.state.users}/>
 				<Login/>
+				<button onclick="login()">
+  			LOGIN
+				</button>
+				<button onclick="register()">
+  			REGISTER
+				</button>
 			</div>
 		)
 	}
 }
 // end::app[]
 
-// tag::employee-list[]
-class EmployeeList extends React.Component{
+class User extends React.Component{
 	render() {
-		const employees = this.props.employees.map(employee =>
-			<Employee key={employee._links.self.href} employee={employee}/>
+		return (
+			<tr>
+				<td>{this.props.user.username}</td>
+				<td>{this.props.user.email}</td>
+				<td>{this.props.user.password}</td>
+			</tr>
+		)
+	}
+}
+
+class UserList extends React.Component{
+	render() {
+		const users = this.props.users.map(user =>
+			<User key={user._links.self.href} user={user}/>
 		);
 		return (
 			<table>
@@ -45,27 +62,12 @@ class EmployeeList extends React.Component{
 						<th>Last Name</th>
 						<th>Description</th>
 					</tr>
-					{employees}
+					{users}
 				</tbody>
 			</table>
 		)
 	}
 }
-// end::employee-list[]
-
-// tag::employee[]
-class Employee extends React.Component{
-	render() {
-		return (
-			<tr>
-				<td>{this.props.employee.firstName}</td>
-				<td>{this.props.employee.lastName}</td>
-				<td>{this.props.employee.description}</td>
-			</tr>
-		)
-	}
-}
-// end::employee[]
 
 class Login extends React.Component{
 	render() {
@@ -84,7 +86,6 @@ class Login extends React.Component{
 				<input/>
 				</div>
 			</div>
-
 		)
 	}
 }
