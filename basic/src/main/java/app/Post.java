@@ -12,21 +12,36 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Post {
     private @Id @GeneratedValue Long id;
-    private String title;
-    private String text;
-    @ManyToOne(fetch = FetchType.LAZY)
+
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userID")
     private User user;
 
-    public Post(String title, String text) {
+    private String title;
+    private String text;
+
+	private Post() {}
+
+    public Post(String user, String title, String text) {
+		this.user = new User(user, "password");
 		this.title = title;
 		this.text = text;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, title, text);
+		return Objects.hash(id, user, title, text);
 	}
+
+	/*
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	*/
 
 	public Long getId() {
 		return id;
