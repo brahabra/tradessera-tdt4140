@@ -20,16 +20,24 @@ class App extends React.Component { // <1>
 		});
 	}
 
+	loggedIn() {
+		alert('You are now logged in!');
+	}
+
+	registered() {
+		alert('You are now registered!');
+	}
+
 	render() { // <3>
 		return (
 			<div>
 				<UserList users={this.state.users}/>
 				<Login/>
-				<button onclick="login()">
-  			LOGIN
+				<button onClick={this.loggedIn}>
+  				LOGIN
 				</button>
-				<button onclick="register()">
-  			REGISTER
+				<button onClick={this.registered}>
+  				REGISTER
 				</button>
 			</div>
 		)
