@@ -12,7 +12,7 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {employees: [], attributes: [], pageSize: 2, links: {}};
+		this.state = {posts: [], attributes: [], pageSize: 2, links: {}};
 		this.updatePageSize = this.updatePageSize.bind(this);
 		this.onCreate = this.onCreate.bind(this);
 		this.onDelete = this.onDelete.bind(this);
@@ -22,38 +22,38 @@ class App extends React.Component {
 	// tag::follow-2[]
 	loadFromServer(pageSize) {
 		follow(client, root, [
-			{rel: 'employees', params: {size: pageSize}}]
-		).then(employeeCollection => {
+			{rel: 'posts', params: {size: pageSize}}]
+		).then(postCollection => {
 			return client({
 				method: 'GET',
-				path: employeeCollection.entity._links.profile.href,
+				path: postCollection.entity._links.profile.href,
 				headers: {'Accept': 'application/schema+json'}
 			}).then(schema => {
 				this.schema = schema.entity;
-				return employeeCollection;
+				return postCollection;
 			});
-		}).done(employeeCollection => {
+		}).done(postCollection => {
 			this.setState({
-				employees: employeeCollection.entity._embedded.employees,
+				posts: postCollection.entity._embedded.posts,
 				attributes: Object.keys(this.schema.properties),
 				pageSize: pageSize,
-				links: employeeCollection.entity._links});
+				links: postCollection.entity._links});
 		});
 	}
 	// end::follow-2[]
 
 	// tag::create[]
-	onCreate(newEmployee) {
-		follow(client, root, ['employees']).then(employeeCollection => {
+	onCreate(newPost) {
+		follow(client, root, ['posts']).then(postCollection => {
 			return client({
 				method: 'POST',
-				path: employeeCollection.entity._links.self.href,
-				entity: newEmployee,
+				path: postCollection.entity._links.self.href,
+				entity: newPost,
 				headers: {'Content-Type': 'application/json'}
 			})
 		}).then(response => {
 			return follow(client, root, [
-				{rel: 'employees', params: {'size': this.state.pageSize}}]);
+				{rel: 'posts', params: {'size': this.state.pageSize}}]);
 		}).done(response => {
 			if (typeof response.entity._links.last !== "undefined") {
 				this.onNavigate(response.entity._links.last.href);
@@ -65,8 +65,8 @@ class App extends React.Component {
 	// end::create[]
 
 	// tag::delete[]
-	onDelete(employee) {
-		client({method: 'DELETE', path: employee._links.self.href}).done(response => {
+	onDelete(post) {
+		client({method: 'DELETE', path: post._links.self.href}).done(response => {
 			this.loadFromServer(this.state.pageSize);
 		});
 	}
@@ -74,12 +74,12 @@ class App extends React.Component {
 
 	// tag::navigate[]
 	onNavigate(navUri) {
-		client({method: 'GET', path: navUri}).done(employeeCollection => {
+		client({method: 'GET', path: navUri}).done(postCollection => {
 			this.setState({
-				employees: employeeCollection.entity._embedded.employees,
+				posts: postCollection.entity._embedded.posts,
 				attributes: this.state.attributes,
 				pageSize: this.state.pageSize,
-				links: employeeCollection.entity._links
+				links: postCollection.entity._links
 			});
 		});
 	}
@@ -103,7 +103,7 @@ class App extends React.Component {
 		return (
 			<div>
 				<CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
-				<EmployeeList employees={this.state.employees}
+				<PostList posts={this.state.posts}
 							  links={this.state.links}
 							  pageSize={this.state.pageSize}
 							  onNavigate={this.onNavigate}
@@ -124,11 +124,11 @@ class CreateDialog extends React.Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		const newEmployee = {};
+		const newPost = {};
 		this.props.attributes.forEach(attribute => {
-			newEmployee[attribute] = ReactDOM.findDOMNode(this.refs[attribute]).value.trim();
+			newPost[attribute] = ReactDOM.findDOMNode(this.refs[attribute]).value.trim();
 		});
-		this.props.onCreate(newEmployee);
+		this.props.onCreate(newPost);
 
 		// clear out the dialog's inputs
 		this.props.attributes.forEach(attribute => {
@@ -148,13 +148,13 @@ class CreateDialog extends React.Component {
 
 		return (
 			<div>
-				<a href="#createEmployee">Create</a>
+				<a href="#createPost">Create</a>
 
-				<div id="createEmployee" className="modalDialog">
+				<div id="createPost" className="modalDialog">
 					<div>
 						<a href="#" title="Close" className="close">X</a>
 
-						<h2>Create new employee</h2>
+						<h2>Create new post</h2>
 
 						<form>
 							{inputs}
@@ -169,7 +169,7 @@ class CreateDialog extends React.Component {
 }
 // end::create-dialog[]
 
-class EmployeeList extends React.Component {
+class PostList extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -217,8 +217,8 @@ class EmployeeList extends React.Component {
 
 	// tag::employee-list-render[]
 	render() {
-		const employees = this.props.employees.map(employee =>
-			<Employee key={employee._links.self.href} employee={employee} onDelete={this.props.onDelete}/>
+		const posts = this.props.posts.map(post =>
+			<Post key={post._links.self.href} post={post} onDelete={this.props.onDelete}/>
 		);
 
 		const navLinks = [];
@@ -241,12 +241,11 @@ class EmployeeList extends React.Component {
 				<table>
 					<tbody>
 						<tr>
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th>Description</th>
-							<th></th>
+							<th>User</th>
+							<th>Title</th>
+							<th>Text</th>
 						</tr>
-						{employees}
+						{posts}
 					</tbody>
 				</table>
 				<div>
@@ -259,7 +258,7 @@ class EmployeeList extends React.Component {
 }
 
 // tag::employee[]
-class Employee extends React.Component {
+class Post extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -267,15 +266,15 @@ class Employee extends React.Component {
 	}
 
 	handleDelete() {
-		this.props.onDelete(this.props.employee);
+		this.props.onDelete(this.props.post);
 	}
 
 	render() {
 		return (
 			<tr>
-				<td>{this.props.employee.firstName}</td>
-				<td>{this.props.employee.lastName}</td>
-				<td>{this.props.employee.description}</td>
+				
+				<td>{this.props.post.title}</td>
+				<td>{this.props.post.text}</td>
 				<td>
 					<button onClick={this.handleDelete}>Delete</button>
 				</td>

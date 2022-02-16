@@ -1,12 +1,14 @@
 package app;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -14,6 +16,8 @@ public class User {
 	private @Id @GeneratedValue Long id;
 	private String username;
 	private String password;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private Collection<Post> posts = new ArrayList<>();
 
 	public User(String username, String password) {
 		this.username = username;
@@ -33,7 +37,6 @@ public class User {
 */
 	@Override
 	public int hashCode() {
-
 		return Objects.hash(id, username, password);
 	}
 
@@ -61,9 +64,13 @@ public class User {
 		this.password = password;
 	}
 
+	public void addPosts(Post post) {
+		posts.add(post);
+	}
 
-
-	
+	public void removePosts(Post post) {
+		posts.remove(post);
+	}
 
 	@Override
 	public String toString() {
