@@ -26,6 +26,7 @@ class App extends React.Component {
 		this.onCreate = this.onCreate.bind(this);
 		this.onDelete = this.onDelete.bind(this);
 		this.onNavigate = this.onNavigate.bind(this);
+		this.addPost = this.addPost.bind(this);
 	}
 
 	componentDidMount() {
@@ -147,10 +148,19 @@ class App extends React.Component {
 	}
 	// end::update-page-size[]
 
+	addPost(post){
+		this.state.currentUser.posts.push(post);
+		client({method: 'PUT', path: currentUser._links.self.href}).done(response => {
+			this.loadUsersFromServer();
+			this.loadPostsFromServer();
+		});
+	}
+
 	render() { // <3>
 		return (
 			<div>
-				<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}/>
+				<CreatePost attributes={this.state.attributes} onCreate={this.onCreate} 
+				addPost={this.addPost} currentUser={this.state.currentUser}/>
 				<PostList posts={this.state.posts}
 								links={this.state.links}
 								pageSize={this.state.pageSize}

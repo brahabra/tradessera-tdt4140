@@ -6,49 +6,53 @@ class CreatePost extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.state = {title: '', text: ''}
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleChangeTitle = this.handleChangeTitle.bind(this);
+		this.handleChangeText = this.handleChangeText.bind(this);
+	}
+
+	handleChangeTitle(event){
+		let {value} = event.target;
+		this.setState({title: value});
+	}
+
+	handleChangeText(event) {
+		let {value} = event.target;
+		this.setState({text: value});
 	}
 
 	handleSubmit(e) {
 		e.preventDefault();
-		const newPost = {};
-		this.props.attributes.forEach(attribute => {
-			newPost[attribute] = ReactDOM.findDOMNode(this.refs[attribute]).value.trim();
-		});
+		const newPost = {title: this.state.title, text: this.state.text, user: this.props.currentUser};
 		this.props.onCreate(newPost);
+		this.props.addPost(newPost);
 
 		// clear out the dialog's inputs
-		this.props.attributes.forEach(attribute => {
-			ReactDOM.findDOMNode(this.refs[attribute]).value = '';
-		});
-
-		// Navigate away from the dialog to hide it.
-		window.location = "#";
+		this.state.title = '';
+		this.state.text = '';
 	}
 
 	render() {
-		const inputs = this.props.attributes.map(attribute =>
-			<p key={attribute}>
-				<input type="text" placeholder={attribute} ref={attribute} className="field"/>
-			</p>
-		);
-
 		return (
 			<div>
-				<a href="#createPost">Create</a>
 
-				<div id="createPost" className="modalDialog">
-					<div>
-						<a href="#" title="Close" className="close">X</a>
+				<h2>Create new post</h2>
 
-						<h2>Create new post</h2>
-
-						<form>
-							{inputs}
-							<button onClick={this.handleSubmit}>Create</button>
-						</form>
-					</div>
-				</div>
+				<form>
+					<label>
+						Title:
+						<input type="text" value={this.state.title} placeholder="title"
+							onChange={event => this.handleChangeTitle(event)}/>
+					</label>
+					<label>
+						Text:
+						<input type="text" value={this.state.text} placeholder="text"
+							onChange={event => this.handleChangeText(event)}/>
+					</label>
+					<br></br>
+					<input type='submit' value='Create'/>
+				</form>
 			</div>
 		)
 	}

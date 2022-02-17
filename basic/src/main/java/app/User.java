@@ -66,11 +66,11 @@ public class User {
 		this.password = password;
 	}
 
-	public void addPosts(Post post) {
+	public void addPost(Post post) {
 		posts.add(post);
 	}
 
-	public void removePosts(Post post) {
+	public void removePost(Post post) {
 		posts.remove(post);
 	}
 

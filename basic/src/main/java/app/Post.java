@@ -33,7 +33,6 @@ public class Post {
 		return Objects.hash(id, user, title, text);
 	}
 
-	/*
 	public User getUser() {
 		return user;
 	}
@@ -41,7 +40,6 @@ public class Post {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	*/
 
 	public Long getId() {
 		return id;
