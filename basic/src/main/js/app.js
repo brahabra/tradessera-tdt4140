@@ -18,7 +18,7 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {users: [], currentUser: null, posts: [], attributes: [], pageSize: 2, links: {}};
+		this.state = {users: [], currentUser: {}, posts: [], attributes: [], pageSize: 2, links: {}};
 		this.onCreateUser = this.onCreateUser.bind(this);
 		this.onLogin = this.onLogin.bind(this);
 		this.onDeleteUser = this.onDeleteUser.bind(this);
@@ -91,6 +91,7 @@ class App extends React.Component {
 	onLogin(currentUser) {
 		const self = this;
 		this.state.currentUser = currentUser;
+		this.loadPostsFromServer();
 	}
 
 
@@ -152,14 +153,9 @@ class App extends React.Component {
 		console.log("Current user: " + this.state.currentUser.username);
 		console.log("Post: " + post.title);
 		const posts = [];
-		if(this.state.currentUser.posts != null){
-			posts = this.state.currentUser.posts;
-		}
 		posts.push(post);
 		console.log(posts);
-
-		this.state.currentUser.posts = posts;
-
+/*
 		follow(client, root, ['users']).then(response => {
 			return client({
 				method: 'PUT',
@@ -172,6 +168,7 @@ class App extends React.Component {
 		}).done(response => {
 			this.loadUsersFromServer();
 		});
+		*/
 	}
 
 	render() { // <3>

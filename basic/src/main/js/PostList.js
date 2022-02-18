@@ -97,10 +97,10 @@ class Post extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.user);
+		console.log(this.props.post.user);
 		return (
 			<tr>
-				<td>{this.state.username}</td>
+				<td>{this.props.post.username}</td>
 				<td>{this.props.post.title}</td>
 				<td>{this.props.post.text}</td>
 				<td>
