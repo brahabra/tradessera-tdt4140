@@ -149,10 +149,28 @@ class App extends React.Component {
 	// end::update-page-size[]
 
 	addPost(post){
-		this.state.currentUser.posts.push(post);
-		client({method: 'PUT', path: currentUser._links.self.href}).done(response => {
+		console.log("Current user: " + this.state.currentUser.username);
+		console.log("Post: " + post.title);
+		const posts = [];
+		if(this.state.currentUser.posts != null){
+			posts = this.state.currentUser.posts;
+		}
+		posts.push(post);
+		console.log(posts);
+
+		this.state.currentUser.posts = posts;
+
+		follow(client, root, ['users']).then(response => {
+			return client({
+				method: 'PUT',
+				path: response.entity._links.self.href,
+				entity: this.state.currentUser,
+				headers: {'Content-Type': 'application/json'}
+			})
+		}).then(response => {
+			return follow(client, root, [{rel: 'users'}]);
+		}).done(response => {
 			this.loadUsersFromServer();
-			this.loadPostsFromServer();
 		});
 	}
 

@@ -88,6 +88,7 @@ class Post extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.state = {username: ''};
 		this.handleDelete = this.handleDelete.bind(this);
 	}
 
@@ -96,9 +97,10 @@ class Post extends React.Component {
 	}
 
 	render() {
+		console.log(this.props.user);
 		return (
 			<tr>
-				<td></td>
+				<td>{this.state.username}</td>
 				<td>{this.props.post.title}</td>
 				<td>{this.props.post.text}</td>
 				<td>
