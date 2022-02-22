@@ -176,14 +176,14 @@ class App extends React.Component {
 			<div>
 				<CreatePost attributes={this.state.attributes} onCreate={this.onCreate} 
 				addPost={this.addPost} currentUser={this.state.currentUser}/>
-				<PostList posts={this.state.posts}
+				<PostList posts={this.state.posts} currentUser={this.state.currentUser}
 								links={this.state.links}
 								pageSize={this.state.pageSize}
 								onNavigate={this.onNavigate}
 								onDelete={this.onDelete}
 								updatePageSize={this.updatePageSize}/>
 				<UserList users={this.state.users} onDeleteUser={this.onDeleteUser}/>
-				<Register onCreateUser={this.onCreateUser}/>
+				<Register users={this.state.users} onCreateUser={this.onCreateUser}/>
 				<Login users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin}/>
 			</div>
 		)

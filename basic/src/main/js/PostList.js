@@ -65,7 +65,6 @@ class PostList extends React.Component {
 
 		return (
 			<div>
-				<input ref="pageSize" defaultValue={this.props.pageSize} onInput={this.handleInput}/>
 				<table>
 					<tbody>
 						<tr>
@@ -76,9 +75,6 @@ class PostList extends React.Component {
 						{posts}
 					</tbody>
 				</table>
-				<div>
-					{navLinks}
-				</div>
 			</div>
 		)
 	}

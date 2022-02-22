@@ -22,9 +22,20 @@ class Register extends React.Component{
 	
 	handleSubmit(event) {
 		event.preventDefault();
-		const newUser = {username: this.state.uname, password: this.state.pass};
-		this.props.onCreateUser(newUser);
-		alert('A name was submitted: ' + this.state.uname + "\nAnd a password: " + this.state.pass);
+		let available = true;
+		for (let index = 0; index < this.props.users.length; index++) {
+            const element = this.props.users[index];
+            if(element.username == this.state.uname){
+                alert('Username already taken, please try another');
+				available = false;
+			}
+		}
+		if(available){
+			const newUser = {username: this.state.uname, password: this.state.pass};
+			this.props.onCreateUser(newUser);
+			alert('A name was submitted: ' + this.state.uname + "\nAnd a password: " + this.state.pass);
+		}
+
 		this.state.uname = '';
 		this.state.pass = '';
 	}
