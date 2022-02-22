@@ -65,7 +65,6 @@ class PostList extends React.Component {
 
 		return (
 			<div>
-				<input ref="pageSize" defaultValue={this.props.pageSize} onInput={this.handleInput}/>
 				<table>
 					<tbody>
 						<tr>
@@ -76,9 +75,6 @@ class PostList extends React.Component {
 						{posts}
 					</tbody>
 				</table>
-				<div>
-					{navLinks}
-				</div>
 			</div>
 		)
 	}
@@ -88,6 +84,7 @@ class Post extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.state = {username: ''};
 		this.handleDelete = this.handleDelete.bind(this);
 	}
 
@@ -96,9 +93,10 @@ class Post extends React.Component {
 	}
 
 	render() {
+		console.log(this.props.post.user);
 		return (
 			<tr>
-				<td></td>
+				<td>{this.props.post.username}</td>
 				<td>{this.props.post.title}</td>
 				<td>{this.props.post.text}</td>
 				<td>

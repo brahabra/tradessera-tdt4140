@@ -17,13 +17,15 @@ public class Post {
     @JoinColumn(name = "userID")
     private User user;
 
+	private String username;
     private String title;
     private String text;
 
-	private Post() {}
+	public Post() {}
 
-    public Post(String user, String title, String text) {
-		this.user = new User(user, "password");
+    public Post(String title, String text, User user) {
+		this.user = user;
+		this.username = user.getUsername();
 		this.title = title;
 		this.text = text;
 	}
@@ -33,15 +35,17 @@ public class Post {
 		return Objects.hash(id, user, title, text);
 	}
 
-	/*
 	public User getUser() {
 		return user;
+	}
+
+	public String getUsername() {
+		return username;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
 	}
-	*/
 
 	public Long getId() {
 		return id;
