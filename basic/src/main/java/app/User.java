@@ -74,6 +74,10 @@ public class User {
 		posts.remove(post);
 	}
 
+	public Collection<Post> getPosts() {
+		return posts;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee{" +
