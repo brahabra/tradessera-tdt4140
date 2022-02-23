@@ -4,6 +4,10 @@ import {UserList} from './UserList';
 import {PostList} from './PostList';
 import {CreatePost} from './CreatePost';
 import Index from './index';
+import Home from "./Home";
+import Logg from "./Logg";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 'use strict';
 
 const React = require('react');
@@ -150,25 +154,42 @@ class App extends React.Component {
 
 	render() { // <3>
 		return (
-			<div>
-				<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}/>
-				<PostList posts={this.state.posts}
-								links={this.state.links}
-								pageSize={this.state.pageSize}
-								onNavigate={this.onNavigate}
-								onDelete={this.onDelete}
-								updatePageSize={this.updatePageSize}/>
-				<UserList users={this.state.users} onDeleteUser={this.onDeleteUser}/>
-				<Register onCreateUser={this.onCreateUser}/>
-				<Login users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin}/>
-			</div>
-		)
+      <Router>
+        <Routes>
+          <Route path='/' element={<Home />}/>
+          <Route path='/login' element={<Login users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin}/>}/>
+					<Route path='/users' element={<UserList users={this.state.users} onDeleteUser={this.onDeleteUser}/>}/>
+					<Route path='/register' element={<Register onCreateUser={this.onCreateUser}/>}/>
+					<Route path='/posts' element={<PostList posts={this.state.posts}
+						links={this.state.links}
+						pageSize={this.state.pageSize}
+						onNavigate={this.onNavigate}
+						onDelete={this.onDelete}
+						updatePageSize={this.updatePageSize}/>}/>
+					<Route path='/createPost' element={<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}/>}/>
+        </Routes>
+      </Router>
+    )
+		/*
+		<div>
+		<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}/>
+		<PostList posts={this.state.posts}
+						links={this.state.links}
+						pageSize={this.state.pageSize}
+						onNavigate={this.onNavigate}
+						onDelete={this.onDelete}
+						updatePageSize={this.updatePageSize}/>
+		<UserList users={this.state.users} onDeleteUser={this.onDeleteUser}/>
+		<Register onCreateUser={this.onCreateUser}/>
+		<Login users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin}/>
+	</div>
+	*/
 	}
 }
 
 
 
 ReactDOM.render(
-	<Index />,
+	<App />,
 	document.getElementById('react')
 )
