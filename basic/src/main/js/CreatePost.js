@@ -1,4 +1,5 @@
 import React from "react";
+import { Form, Header, Button, Input} from "./components/styles/Form.styled"
 
 const ReactDOM = require('react-dom');
 
@@ -29,7 +30,7 @@ class CreatePost extends React.Component {
 	render() {
 		const inputs = this.props.attributes.map(attribute =>
 			<p key={attribute}>
-				<input type="text" placeholder={attribute} ref={attribute} className="field"/>
+				<Input type="text" placeholder={attribute} ref={attribute} className="field"/>
 			</p>
 		);
 
@@ -41,12 +42,12 @@ class CreatePost extends React.Component {
 					<div>
 						<a href="#" title="Close" className="close">X</a>
 
-						<h2>Create new post</h2>
+						<Header>Create new post</Header>
 
-						<form>
+						<Form>
 							{inputs}
-							<button onClick={this.handleSubmit}>Create</button>
-						</form>
+							<Button onClick={this.handleSubmit}>Create</Button>
+						</Form>
 					</div>
 				</div>
 			</div>

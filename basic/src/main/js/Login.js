@@ -1,7 +1,7 @@
 import React from "react";
+import { Form, Button, Input} from "./components/styles/Form.styled"
 
-
-class Login extends React.Component{
+class Login extends React.Component {
     
 	constructor(props) {
 		super(props);
@@ -41,25 +41,26 @@ class Login extends React.Component{
     
 	render() {
 		return (
-			<div>
-				<form onSubmit={this.handleSubmit}>
+				<Form onSubmit={this.handleSubmit}>
 					<label>
-						Username:
-						<input type="text" value={this.state.uname} placeholder="Enter Username"
+						<Input type="text" value={this.state.uname} placeholder="Enter Username"
 						 onChange={event => this.handleChangeName(event)} />
 					</label>
 					<br></br>
 					<label>
-						Password:
-						<input type="text" value={this.state.pass} placeholder="Enter Password"
+						<Input type="text" value={this.state.pass} placeholder="Enter Password"
 						 onChange={event => this.handleChangePass(event)} />
 					</label>
 					<br></br>
-					<input type="submit" value="Login" />
-				</form>
-			</div>
+					<Button>Login</Button>
+				</Form>
 		)
 	}
 }
+
+/**
+ * <input type="submit" value="Login" />
+ * form og div, se createpost og form.styled
+ */
 
 export {Login}
