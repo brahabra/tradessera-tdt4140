@@ -23,7 +23,7 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {users: [], currentUser: null, posts: [], attributes: [], pageSize: 2, links: {}};
+		this.state = {users: [], currentUser: {}, posts: [], attributes: [], pageSize: 2, links: {}};
 		this.onCreateUser = this.onCreateUser.bind(this);
 		this.onLogin = this.onLogin.bind(this);
 		this.onDeleteUser = this.onDeleteUser.bind(this);
@@ -31,6 +31,7 @@ class App extends React.Component {
 		this.onCreate = this.onCreate.bind(this);
 		this.onDelete = this.onDelete.bind(this);
 		this.onNavigate = this.onNavigate.bind(this);
+		this.addPost = this.addPost.bind(this);
 	}
 
 	componentDidMount() {
@@ -95,6 +96,7 @@ class App extends React.Component {
 	onLogin(currentUser) {
 		const self = this;
 		this.state.currentUser = currentUser;
+		this.loadPostsFromServer();
 	}
 
 
@@ -152,38 +154,62 @@ class App extends React.Component {
 	}
 	// end::update-page-size[]
 
+	addPost(post){
+		console.log("Current user: " + this.state.currentUser.username);
+		console.log("Post: " + post.title);
+		const posts = [];
+		posts.push(post);
+		console.log(posts);
+/*
+		follow(client, root, ['users']).then(response => {
+			return client({
+				method: 'PUT',
+				path: response.entity._links.self.href,
+				entity: this.state.currentUser,
+				headers: {'Content-Type': 'application/json'}
+			})
+		}).then(response => {
+			return follow(client, root, [{rel: 'users'}]);
+		}).done(response => {
+			this.loadUsersFromServer();
+		});
+		*/
+	}
+
 	render() { // <3>
 		return (
-      <Router>
-        <Routes>
-          <Route path='/' element={<Home />}/>
-          <Route path='/login' element={<Login users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin}/>}/>
+			<Router>
+				<Routes>
+					<Route path='/' element={<Home />}/>
+					<Route path='/login' element={<Login users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin}/>}/>
 					<Route path='/users' element={<UserList users={this.state.users} onDeleteUser={this.onDeleteUser}/>}/>
-					<Route path='/register' element={<Register onCreateUser={this.onCreateUser}/>}/>
-					<Route path='/posts' element={<PostList posts={this.state.posts}
+					<Route path='/register' element={<Register users={this.state.users} onCreateUser={this.onCreateUser}/>}/>
+					<Route path='/posts' element={<PostList posts={this.state.posts} currentUser={this.state.currentUser}
 						links={this.state.links}
 						pageSize={this.state.pageSize}
 						onNavigate={this.onNavigate}
 						onDelete={this.onDelete}
 						updatePageSize={this.updatePageSize}/>}/>
-					<Route path='/createPost' element={<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}/>}/>
-        </Routes>
-      </Router>
-    )
-		/*
-		<div>
-		<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}/>
-		<PostList posts={this.state.posts}
-						links={this.state.links}
-						pageSize={this.state.pageSize}
-						onNavigate={this.onNavigate}
-						onDelete={this.onDelete}
-						updatePageSize={this.updatePageSize}/>
-		<UserList users={this.state.users} onDeleteUser={this.onDeleteUser}/>
-		<Register onCreateUser={this.onCreateUser}/>
-		<Login users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin}/>
-	</div>
-	*/
+					<Route path='/createPost' element={<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}
+						addPost={this.addPost} currentUser={this.state.currentUser}/>}/>
+				</Routes>
+			</Router>
+			/*
+			<div>
+				<CreatePost attributes={this.state.attributes} onCreate={this.onCreate} 
+				addPost={this.addPost} currentUser={this.state.currentUser}/>
+				<PostList posts={this.state.posts} currentUser={this.state.currentUser}
+								links={this.state.links}
+								pageSize={this.state.pageSize}
+								onNavigate={this.onNavigate}
+								onDelete={this.onDelete}
+								updatePageSize={this.updatePageSize}/>
+				<UserList users={this.state.users} onDeleteUser={this.onDeleteUser}/>
+				<Register users={this.state.users} onCreateUser={this.onCreateUser}/>
+				<Login users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin}/>
+			</div>
+			*/
+		)
 	}
 }
 

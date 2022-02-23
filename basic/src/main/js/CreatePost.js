@@ -7,49 +7,54 @@ class CreatePost extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.state = {title: '', text: ''}
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleChangeTitle = this.handleChangeTitle.bind(this);
+		this.handleChangeText = this.handleChangeText.bind(this);
+	}
+
+	handleChangeTitle(event){
+		let {value} = event.target;
+		this.setState({title: value});
+	}
+
+	handleChangeText(event) {
+		let {value} = event.target;
+		this.setState({text: value});
 	}
 
 	handleSubmit(e) {
 		e.preventDefault();
-		const newPost = {};
-		this.props.attributes.forEach(attribute => {
-			newPost[attribute] = ReactDOM.findDOMNode(this.refs[attribute]).value.trim();
-		});
+		const newPost = {title: this.state.title, text: this.state.text, user: this.props.currentUser};
 		this.props.onCreate(newPost);
+		this.props.addPost(newPost);
 
 		// clear out the dialog's inputs
-		this.props.attributes.forEach(attribute => {
-			ReactDOM.findDOMNode(this.refs[attribute]).value = '';
-		});
-
-		// Navigate away from the dialog to hide it.
-		window.location = "#";
+		this.state.title = '';
+		this.state.text = '';
 	}
 
 	render() {
-		const inputs = this.props.attributes.map(attribute =>
-			<p key={attribute}>
-				<Input type="text" placeholder={attribute} ref={attribute} className="field"/>
-			</p>
-		);
-
 		return (
 			<div>
-				<a href="#createPost">Create</a>
 
-				<div id="createPost" className="modalDialog">
-					<div>
-						<a href="#" title="Close" className="close">X</a>
+				<h2>Create new post</h2>
 
-						<Header>Create new post</Header>
-
-						<Form>
-							{inputs}
-							<Button onClick={this.handleSubmit}>Create</Button>
-						</Form>
-					</div>
-				</div>
+				<form onSubmit={this.handleSubmit}>
+					<label>
+						Title:
+						<input type="text" value={this.state.title} placeholder="title"
+							onChange={event => this.handleChangeTitle(event)}/>
+					</label>
+					<br></br>
+					<label>
+						Text:
+						<input type="text" value={this.state.text} placeholder="text"
+							onChange={event => this.handleChangeText(event)}/>
+					</label>
+					<br></br>
+					<Button onClick={this.handleSubmit}>Create</Button>
+				</form>
 			</div>
 		)
 	}
