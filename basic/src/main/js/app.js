@@ -3,6 +3,7 @@ import {Login} from './Login';
 import {UserList} from './UserList';
 import {PostList} from './PostList';
 import {CreatePost} from './CreatePost';
+import Index from './index';
 'use strict';
 
 const React = require('react');
@@ -168,6 +169,6 @@ class App extends React.Component {
 
 
 ReactDOM.render(
-	<App />,
+	<Index />,
 	document.getElementById('react')
 )
