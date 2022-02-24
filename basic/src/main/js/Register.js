@@ -5,10 +5,11 @@ class Register extends React.Component{
     
 	constructor(props) {
 		super(props);
-		this.state = {uname: '', pass: ''};
+		this.state = {uname: '', pass: '', mail: ''};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChangeName = this.handleChangeName.bind(this);
 		this.handleChangePass = this.handleChangePass.bind(this);
+		this.handleChangeMail = this.handleChangeMail.bind(this);
 	}
 
 	handleChangeName(event) {
@@ -18,6 +19,10 @@ class Register extends React.Component{
 	handleChangePass(event) {
 		let {value} = event.target;
 		this.setState({pass: value});
+	}
+	handleChangeMail(event) {
+		let {value} = event.target;
+		this.setState({mail: value});
 	}
 	
 	handleSubmit(event) {
@@ -31,13 +36,14 @@ class Register extends React.Component{
 			}
 		}
 		if(available){
-			const newUser = {username: this.state.uname, password: this.state.pass};
+			const newUser = {username: this.state.uname, password: this.state.pass, email: this.state.mail};
 			this.props.onCreateUser(newUser);
-			alert('A name was submitted: ' + this.state.uname + "\nAnd a password: " + this.state.pass);
+			alert('Successfully regstered: ' + this.state.uname + "\nWith mail: " + this.state.mail);
 		}
 
 		this.state.uname = '';
 		this.state.pass = '';
+		this.state.mail = '';
 	}
     
 	render() {
@@ -51,6 +57,11 @@ class Register extends React.Component{
 					<label>
 						<Input type="text" value={this.state.pass} placeholder="Enter Password"
 						 onChange={event => this.handleChangePass(event)} />
+					</label>
+					<br></br>
+					<label>
+						<Input type="text" value={this.state.mail} placeholder="Enter Email"
+						 onChange={event => this.handleChangeMail(event)} />
 					</label>
 					<br></br>
 					<Button>Register</Button>
