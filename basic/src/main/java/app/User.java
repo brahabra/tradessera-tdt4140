@@ -16,27 +16,18 @@ public class User {
 	private @Id @GeneratedValue Long id;
 	private String username;
 	private String password;
+	private String email;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Collection<Post> posts = new ArrayList<>();
 
 	public User() {}
 	
-	public User(String username, String password) {
+	public User(String username, String password, String email) {
 		this.username = username;
 		this.password = password;
+		this.email = email;
 	}
-/*
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Employee employee = (Employee) o;
-		return Objects.equals(id, employee.id) &&
-			Objects.equals(firstName, employee.firstName) &&
-			Objects.equals(lastName, employee.lastName) &&
-			Objects.equals(description, employee.description);
-	}
-*/
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, username, password);
@@ -74,16 +65,25 @@ public class User {
 		posts.remove(post);
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Collection<Post> getPosts() {
 		return posts;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee{" +
+		return "User{" +
 			"id=" + id +
 			", username='" + username + '\'' +
 			", password='" + password + '\'' +
+			", email='" + email + '\'' +
 			'}';
 	}
 }
