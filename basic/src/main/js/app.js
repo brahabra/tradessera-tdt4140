@@ -3,6 +3,11 @@ import {Login} from './Login';
 import {UserList} from './UserList';
 import {PostList} from './PostList';
 import {CreatePost} from './CreatePost';
+import Index from './index';
+import Home from "./Home";
+import Logg from "./Logg";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 'use strict';
 
 const React = require('react');
@@ -18,9 +23,10 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {users: [], currentUser: {}, posts: [], attributes: [], pageSize: 2, links: {}};
+		this.state = {users: [], currentUser: JSON.parse(localStorage.getItem("currentUser")) || {}, posts: [], attributes: [], pageSize: 2, links: {}};
 		this.onCreateUser = this.onCreateUser.bind(this);
 		this.onLogin = this.onLogin.bind(this);
+		this.onLogout = this.onLogout.bind(this);
 		this.onDeleteUser = this.onDeleteUser.bind(this);
 		this.updatePageSize = this.updatePageSize.bind(this);
 		this.onCreate = this.onCreate.bind(this);
@@ -89,8 +95,14 @@ class App extends React.Component {
 	}
 
 	onLogin(currentUser) {
-		const self = this;
 		this.state.currentUser = currentUser;
+		localStorage.setItem("currentUser", JSON.stringify(currentUser))
+		this.loadPostsFromServer();
+	}
+
+	onLogout() {
+		this.state.currentUser = {};
+		localStorage.setItem("currentUser", JSON.stringify(this.state.currentUser))
 		this.loadPostsFromServer();
 	}
 
@@ -173,6 +185,28 @@ class App extends React.Component {
 
 	render() { // <3>
 		return (
+			<Router>
+				<Routes>
+					<Route path='/' element={<Home />}/>
+					<Route path='/login' element={<Login users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin} onLogout={this.onLogout}/>}/>
+					<Route path='/users' element={<UserList users={this.state.users} onDeleteUser={this.onDeleteUser}/>}/>
+					<Route path='/register' element={<Register users={this.state.users} onCreateUser={this.onCreateUser}/>}/>
+					<Route path='/posts' element={<PostList posts={this.state.posts} currentUser={this.state.currentUser}
+						links={this.state.links}
+						pageSize={this.state.pageSize}
+						onNavigate={this.onNavigate}
+						onDelete={this.onDelete}
+						updatePageSize={this.updatePageSize}/>}/>
+					<Route path='/createPost' element={<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}
+						addPost={this.addPost} currentUser={this.state.currentUser}/>}/>
+				</Routes>
+			</Router>
+			/*
+			render={() => <Navi user={this.state.user} />}
+			
+			<Route path='/createPost' element={<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}
+				addPost={this.addPost} currentUser={this.state.currentUser}/>}/>
+
 			<div>
 				<CreatePost attributes={this.state.attributes} onCreate={this.onCreate} 
 				addPost={this.addPost} currentUser={this.state.currentUser}/>
@@ -186,6 +220,7 @@ class App extends React.Component {
 				<Register users={this.state.users} onCreateUser={this.onCreateUser}/>
 				<Login users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin}/>
 			</div>
+			*/
 		)
 	}
 }

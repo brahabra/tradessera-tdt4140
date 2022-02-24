@@ -1,4 +1,5 @@
 import React from "react";
+import { Form, Header, Button, Input} from "./components/styles/Form.styled"
 
 const ReactDOM = require('react-dom');
 
@@ -34,6 +35,7 @@ class CreatePost extends React.Component {
 	}
 
 	render() {
+		console.log(this.props.currentUser);
 		return (
 			<div>
 
@@ -52,7 +54,7 @@ class CreatePost extends React.Component {
 							onChange={event => this.handleChangeText(event)}/>
 					</label>
 					<br></br>
-					<input type='submit' value='Create'/>
+					<Button onClick={this.handleSubmit}>Create</Button>
 				</form>
 			</div>
 		)

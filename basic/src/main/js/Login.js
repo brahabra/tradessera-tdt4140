@@ -1,12 +1,13 @@
 import React from "react";
+import { Form, Button, Input} from "./components/styles/Form.styled"
 
-
-class Login extends React.Component{
+class Login extends React.Component {
     
 	constructor(props) {
 		super(props);
 		this.state = {uname: '', pass: ''};
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleLogout = this.handleLogout.bind(this);
 		this.handleChangeName = this.handleChangeName.bind(this);
 		this.handleChangePass = this.handleChangePass.bind(this);
 	}
@@ -33,33 +34,45 @@ class Login extends React.Component{
                     alert('Wrong password, please try again');
                 }
             }
-            
         }
 		this.state.uname = '';
 		this.state.pass = '';
 	}
+
+	handleLogout(event) {
+		event.preventDefault();
+        this.props.onLogout();
+	}
     
 	render() {
+		if(this.props.currentUser.username != null){
+			return <div>
+				{this.props.currentUser.username} is loggged in
+				<br></br>
+				<button onClick={this.handleLogout}>Log out</button>
+			</div>;
+		}
 		return (
-			<div>
-				<form onSubmit={this.handleSubmit}>
+				<Form onSubmit={this.handleSubmit}>
 					<label>
-						Username:
-						<input type="text" value={this.state.uname} placeholder="Enter Username"
+						<Input type="text" value={this.state.uname} placeholder="Enter Username"
 						 onChange={event => this.handleChangeName(event)} />
 					</label>
 					<br></br>
 					<label>
-						Password:
-						<input type="text" value={this.state.pass} placeholder="Enter Password"
+						<Input type="text" value={this.state.pass} placeholder="Enter Password"
 						 onChange={event => this.handleChangePass(event)} />
 					</label>
 					<br></br>
-					<input type="submit" value="Login" />
-				</form>
-			</div>
+					<Button>Login</Button>
+				</Form>
 		)
 	}
 }
+
+/**
+ * <input type="submit" value="Login" />
+ * form og div, se createpost og form.styled
+ */
 
 export {Login}
