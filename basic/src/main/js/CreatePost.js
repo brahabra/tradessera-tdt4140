@@ -27,7 +27,6 @@ class CreatePost extends React.Component {
 		e.preventDefault();
 		const newPost = {title: this.state.title, text: this.state.text, user: this.props.currentUser};
 		this.props.onCreate(newPost);
-		this.props.addPost(newPost);
 
 		// clear out the dialog's inputs
 		this.state.title = '';
@@ -35,7 +34,6 @@ class CreatePost extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.currentUser);
 		return (
 			<div>
 

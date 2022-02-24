@@ -1,6 +1,7 @@
 import React from "react";
 import {Navbar, Nav, Container} from 'react-bootstrap';
-/*import Logo from '../../../Logo.png';*/
+//import Logo from '../../../Logo.png';
+
 
 
 
@@ -10,10 +11,10 @@ export default class NavigatonBar extends React.Component {
         return (
             <Navbar bg="dark" variant="dark">
                 <Container>
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href="..">
                     <img 
                     alt=""
-                    
+                    src="./Logo.png"
                     width="30"
                     height="30"
                     /> {' '} Tradessera
