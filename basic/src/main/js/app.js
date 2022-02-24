@@ -3,6 +3,8 @@ import {Login} from './Login';
 import {UserList} from './UserList';
 import {PostList} from './PostList';
 import {CreatePost} from './CreatePost';
+import NavigationBar from './NavigationBar';
+
 'use strict';
 
 const React = require('react');
@@ -174,6 +176,7 @@ class App extends React.Component {
 	render() { // <3>
 		return (
 			<div>
+				<NavigationBar />
 				<CreatePost attributes={this.state.attributes} onCreate={this.onCreate} 
 				addPost={this.addPost} currentUser={this.state.currentUser}/>
 				<PostList posts={this.state.posts}
