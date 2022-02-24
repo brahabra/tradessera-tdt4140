@@ -18,8 +18,8 @@ public class PostTest {
 
     @BeforeEach
 	public void setUp() throws Exception {
-        this.user1 = new User("userone", "passone", "user1@ntnu.no");
-        this.user2 = new User("usertwo", "passtwo", "user2@ntnu.no");
+        this.user1 = new User("userone", "passone", "user1@ntnu.no","Hei");
+        this.user2 = new User("usertwo", "passtwo", "user2@ntnu.no","Hå");
         this.post1 = new Post("titleone", "textone", this.user1);
     }
 

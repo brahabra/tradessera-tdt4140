@@ -3,8 +3,11 @@ import {Login} from './Login';
 import {UserList} from './UserList';
 import {PostList} from './PostList';
 import {CreatePost} from './CreatePost';
+import {Profile} from './Profile';
+
 import NavigationBar from './NavigationBar';
 import Home from "./Home";
+
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -168,6 +171,7 @@ class App extends React.Component {
 						updatePageSize={this.updatePageSize}/>}/>
 					<Route path='/createPost' element={<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}
 						addPost={this.addPost} currentUser={this.state.currentUser}/>}/>
+					<Route path='/profile' element= {<Profile users={this.state.users} currentUser={this.state.currentUser} />} />
 				</Routes>
 			</Router>
 		)

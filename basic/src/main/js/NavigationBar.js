@@ -26,6 +26,7 @@ export default class NavigatonBar extends React.Component {
                 <Nav.Link href="users">Users</Nav.Link>
                 <Nav.Link href="posts">Posts</Nav.Link>
                 <Nav.Link href="createPost">CreatePost</Nav.Link>
+                <Nav.Link href="profile">Profile</Nav.Link>
                 </Nav>
                 </Container>
             </Navbar>
