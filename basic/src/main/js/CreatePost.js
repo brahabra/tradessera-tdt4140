@@ -39,23 +39,21 @@ class CreatePost extends React.Component {
 		return (
 			<div>
 
-				<h2>Create new post</h2>
+				<Header>Create new post</Header>
 
-				<form onSubmit={this.handleSubmit}>
+				<Form onSubmit={this.handleSubmit}>
 					<label>
-						Title:
-						<input type="text" value={this.state.title} placeholder="title"
+						<Input type="text" value={this.state.title} placeholder="Title"
 							onChange={event => this.handleChangeTitle(event)}/>
 					</label>
 					<br></br>
 					<label>
-						Text:
-						<input type="text" value={this.state.text} placeholder="text"
+						<Input type="text" value={this.state.text} placeholder="Text"
 							onChange={event => this.handleChangeText(event)}/>
 					</label>
 					<br></br>
 					<Button onClick={this.handleSubmit}>Create</Button>
-				</form>
+				</Form>
 			</div>
 		)
 	}
