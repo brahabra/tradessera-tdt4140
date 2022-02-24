@@ -7,6 +7,7 @@ class Login extends React.Component {
 		super(props);
 		this.state = {uname: '', pass: ''};
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleLogout = this.handleLogout.bind(this);
 		this.handleChangeName = this.handleChangeName.bind(this);
 		this.handleChangePass = this.handleChangePass.bind(this);
 	}
@@ -33,13 +34,24 @@ class Login extends React.Component {
                     alert('Wrong password, please try again');
                 }
             }
-            
         }
 		this.state.uname = '';
 		this.state.pass = '';
 	}
+
+	handleLogout(event) {
+		event.preventDefault();
+        this.props.onLogout();
+	}
     
 	render() {
+		if(this.props.currentUser.username != null){
+			return <div>
+				{this.props.currentUser.username} is loggged in
+				<br></br>
+				<button onClick={this.handleLogout}>Log out</button>
+			</div>;
+		}
 		return (
 				<Form onSubmit={this.handleSubmit}>
 					<label>
