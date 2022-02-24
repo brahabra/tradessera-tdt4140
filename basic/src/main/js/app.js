@@ -3,22 +3,20 @@ import {Login} from './Login';
 import {UserList} from './UserList';
 import {PostList} from './PostList';
 import {CreatePost} from './CreatePost';
-import Index from './index';
+import NavigationBar from './NavigationBar';
 import Home from "./Home";
-import Logg from "./Logg";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+
 'use strict';
 
 const React = require('react');
 const ReactDOM = require('react-dom');
 const client = require('./client');
-
 const follow = require('./follow');
-
 const root = '/api';
 
-// tag::app[]
 class App extends React.Component {
 
 	constructor(props) {
@@ -32,7 +30,6 @@ class App extends React.Component {
 		this.onCreate = this.onCreate.bind(this);
 		this.onDelete = this.onDelete.bind(this);
 		this.onNavigate = this.onNavigate.bind(this);
-		this.addPost = this.addPost.bind(this);
 	}
 
 	componentDidMount() {
@@ -49,7 +46,6 @@ class App extends React.Component {
 				path: userCollection.entity._links.profile.href,
 				headers: {'Accept': 'application/schema+json'}
 			}).then(schema => {
-				//this.schema = schema.entity;
 				return userCollection;
 			});
 		}).done(userCollection => {
@@ -106,7 +102,6 @@ class App extends React.Component {
 		this.loadPostsFromServer();
 	}
 
-
 	onCreate(newPost) {
 		follow(client, root, ['posts']).then(postCollection => {
 			return client({
@@ -132,15 +127,13 @@ class App extends React.Component {
 			this.loadUsersFromServer();
 		});
 	}
-	// tag::delete[]
+
 	onDelete(post) {
 		client({method: 'DELETE', path: post._links.self.href}).done(response => {
 			this.loadPostsFromServer(this.state.pageSize);
 		});
 	}
-	// end::delete[]
 
-	// tag::navigate[]
 	onNavigate(navUri) {
 		client({method: 'GET', path: navUri}).done(postCollection => {
 			this.setState({
@@ -151,41 +144,17 @@ class App extends React.Component {
 			});
 		});
 	}
-	// end::navigate[]
 
-	// tag::update-page-size[]
 	updatePageSize(pageSize) {
 		if (pageSize !== this.state.pageSize) {
 			this.loadPostsFromServer(pageSize);
 		}
 	}
-	// end::update-page-size[]
 
-	addPost(post){
-		console.log("Current user: " + this.state.currentUser.username);
-		console.log("Post: " + post.title);
-		const posts = [];
-		posts.push(post);
-		console.log(posts);
-/*
-		follow(client, root, ['users']).then(response => {
-			return client({
-				method: 'PUT',
-				path: response.entity._links.self.href,
-				entity: this.state.currentUser,
-				headers: {'Content-Type': 'application/json'}
-			})
-		}).then(response => {
-			return follow(client, root, [{rel: 'users'}]);
-		}).done(response => {
-			this.loadUsersFromServer();
-		});
-		*/
-	}
-
-	render() { // <3>
+	render() {
 		return (
 			<Router>
+				<NavigationBar />
 				<Routes>
 					<Route path='/' element={<Home />}/>
 					<Route path='/login' element={<Login users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin} onLogout={this.onLogout}/>}/>
@@ -201,30 +170,9 @@ class App extends React.Component {
 						addPost={this.addPost} currentUser={this.state.currentUser}/>}/>
 				</Routes>
 			</Router>
-			/*
-			render={() => <Navi user={this.state.user} />}
-			
-			<Route path='/createPost' element={<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}
-				addPost={this.addPost} currentUser={this.state.currentUser}/>}/>
-
-			<div>
-				<CreatePost attributes={this.state.attributes} onCreate={this.onCreate} 
-				addPost={this.addPost} currentUser={this.state.currentUser}/>
-				<PostList posts={this.state.posts} currentUser={this.state.currentUser}
-								links={this.state.links}
-								pageSize={this.state.pageSize}
-								onNavigate={this.onNavigate}
-								onDelete={this.onDelete}
-								updatePageSize={this.updatePageSize}/>
-				<UserList users={this.state.users} onDeleteUser={this.onDeleteUser}/>
-				<Register users={this.state.users} onCreateUser={this.onCreateUser}/>
-				<Login users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin}/>
-			</div>
-			*/
 		)
 	}
 }
-
 
 
 ReactDOM.render(

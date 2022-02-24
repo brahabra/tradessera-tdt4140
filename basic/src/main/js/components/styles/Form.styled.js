@@ -8,6 +8,7 @@ export const Form = styled.form`
 export const Header = styled.header`
   width: 1000px;
   margin: 0 auto;
+  margin-bottom: 0.6rem;
   font-weight: 900;
   font-size: 150%;
 `
