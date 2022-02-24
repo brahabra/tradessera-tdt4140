@@ -3,11 +3,15 @@ import {Login} from './Login';
 import {UserList} from './UserList';
 import {PostList} from './PostList';
 import {CreatePost} from './CreatePost';
+import NavigationBar from './NavigationBar';
 import Index from './index';
 import Home from "./Home";
 import Logg from "./Logg";
 
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+
 'use strict';
 
 const React = require('react');
@@ -186,6 +190,7 @@ class App extends React.Component {
 	render() { // <3>
 		return (
 			<Router>
+				<NavigationBar />
 				<Routes>
 					<Route path='/' element={<Home />}/>
 					<Route path='/login' element={<Login users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin} onLogout={this.onLogout}/>}/>
@@ -208,6 +213,7 @@ class App extends React.Component {
 				addPost={this.addPost} currentUser={this.state.currentUser}/>}/>
 
 			<div>
+				<NavigationBar />
 				<CreatePost attributes={this.state.attributes} onCreate={this.onCreate} 
 				addPost={this.addPost} currentUser={this.state.currentUser}/>
 				<PostList posts={this.state.posts} currentUser={this.state.currentUser}
