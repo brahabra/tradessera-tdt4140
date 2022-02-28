@@ -1,5 +1,7 @@
 import React from "react";
 
+import {Button} from "./components/styles/Form.styled"
+
 const ReactDOM = require('react-dom');
 
 class PostList extends React.Component {
@@ -100,7 +102,7 @@ class Post extends React.Component {
 				<td>{this.props.post.title}</td>
 				<td>{this.props.post.text}</td>
 				<td>
-					<button onClick={this.handleDelete}>Delete</button>
+					<Button onClick={this.handleDelete}>Delete</Button>
 				</td>
 			</tr>
 		)

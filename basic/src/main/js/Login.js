@@ -49,7 +49,7 @@ class Login extends React.Component {
 			return <div>
 				{this.props.currentUser.username} is loggged in
 				<br></br>
-				<button onClick={this.handleLogout}>Log out</button>
+				<Button onClick={this.handleLogout}>Log out</Button>
 			</div>;
 		}
 		return (

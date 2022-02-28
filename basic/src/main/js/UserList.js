@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {Button} from "./components/styles/Form.styled"
+
 class UserList extends React.Component{
 	render() {
 		const users = this.props.users.map(user =>
@@ -35,7 +37,7 @@ class User extends React.Component{
 			<tr>
 				<td>{this.props.user.username}</td>
 				<td>{this.props.user.password}</td>
-				<td><button onClick={this.handleDelete}>Delete</button></td>
+				<td><Button onClick={this.handleDelete}>Delete</Button></td>
 			</tr>
 		)
 	}

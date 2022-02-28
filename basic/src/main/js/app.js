@@ -171,7 +171,7 @@ class App extends React.Component {
 						updatePageSize={this.updatePageSize}/>}/>
 					<Route path='/createPost' element={<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}
 						addPost={this.addPost} currentUser={this.state.currentUser}/>}/>
-					<Route path='/profile' element= {<Profile users={this.state.users} currentUser={this.state.currentUser} />} />
+					<Route path='/profile' element= {<Profile users={this.state.users} currentUser={this.state.currentUser} onDeleteUser={this.onDeleteUser} onCreateUser={this.onCreateUser}/>} />
 				</Routes>
 			</Router>
 		)
