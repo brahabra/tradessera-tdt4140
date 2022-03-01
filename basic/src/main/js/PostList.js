@@ -48,7 +48,7 @@ class PostList extends React.Component {
 
 	render() {
 		const posts = this.props.posts.map(post =>
-			<Post key={post._links.self.href} post={post} onDelete={this.props.onDelete}/>
+			<Post key={post._links.self.href} post={post} onDelete={this.props.onDelete} currentUser={this.props.currentUser}/>
 		);
 
 		const navLinks = [];
@@ -71,6 +71,7 @@ class PostList extends React.Component {
 					<tbody>
 						<tr>
 							<th>User</th>
+							<th>Mail</th>
 							<th>Title</th>
 							<th>Text</th>
 						</tr>
@@ -88,22 +89,35 @@ class Post extends React.Component {
 		super(props);
 		this.state = {username: ''};
 		this.handleDelete = this.handleDelete.bind(this);
+		this.handleContact = this.handleContact.bind(this);
 	}
 
 	handleDelete() {
 		this.props.onDelete(this.props.post);
 	}
 
+	handleContact() {
+		console.log("Contact not impllemented yet"); //implement this later
+	}
+
 	render() {
-		console.log(this.props.post.user);
+		let button;
+		if(this.props.post.username == this.props.currentUser.username){
+			button = <Button onClick={this.handleDelete}>Delete</Button>;
+		}
+		else{
+			button = <Button onClick={this.handleContact}>Contact</Button>;
+		}
+		
+		console.log(this.props.currentUser);
 		return (
 			<tr>
 				<td>{this.props.post.username}</td>
+				<td>{this.props.post.email}</td>
 				<td>{this.props.post.title}</td>
 				<td>{this.props.post.text}</td>
-				<td>
-					<Button onClick={this.handleDelete}>Delete</Button>
-				</td>
+
+				<td>{button}</td>
 			</tr>
 		)
 	}

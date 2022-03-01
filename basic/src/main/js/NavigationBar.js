@@ -22,16 +22,10 @@ export default class NavigatonBar extends React.Component {
                 </Navbar.Brand>
                 <Nav className="me-auto">
                 <Link>
-                <Nav.Link href="..">Home</Nav.Link>
-                </Link>
-                <Link>
                 <Nav.Link href="register">Register</Nav.Link>
                 </Link>
                 <Link>
                 <Nav.Link href="login">Login</Nav.Link>
-                </Link>
-                <Link>
-                <Nav.Link href="users">Users</Nav.Link>
                 </Link>
                 <Link>
                 <Nav.Link href="posts">Posts</Nav.Link>
@@ -46,5 +40,13 @@ export default class NavigatonBar extends React.Component {
                 
             </Navbar>
         )
-    }   
+    }
+    /*
+    <Link>
+                <Nav.Link href="..">Home</Nav.Link>
+                </Link>
+    <Link>
+                <Nav.Link href="users">Users</Nav.Link>
+                </Link>
+    */   
 }

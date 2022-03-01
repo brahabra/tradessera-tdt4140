@@ -6,17 +6,12 @@ class Profile extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {email: '', bio: ''};
+        this.state = {bio: ''};
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChangeEmail = this.handleChangeEmail.bind(this);
 		this.handleChangeBio = this.handleChangeBio.bind(this);
-        const newUser = null;
+        //const newUser = null;
     }
 
-    handleChangeEmail(event) {
-		let {value} = event.target;
-		this.setState({email: value});
-	}
 	handleChangeBio(event) {
 		let {value} = event.target;
 		this.setState({bio: value});
@@ -26,15 +21,16 @@ class Profile extends React.Component {
 		e.preventDefault();
         const username = this.props.currentUser.username
         const password = this.props.currentUser.password
+        const email = this.props.currentUser.email
 
         this.props.onDeleteUser(this.props.currentUser);
-        newUser = ({username, password, email: this.state.email});
+        newUser = ({username, password, email, bio: this.state.bio});
         this.props.onCreateUser(newUser)
 		// clear out the dialog's inputs
 	}
 
     render() {
-        
+        /*
         if(this.state.email == "") {
             return  <Form onSubmit={this.handleSubmit}>
                     <Input type="text" value={this.state.email} placeholder="Enter Email"
@@ -43,6 +39,7 @@ class Profile extends React.Component {
                     </Form>
                     
         }
+        */
         /*
         if(this.props.currentUser.bio == null) {
             return <Input />
@@ -51,7 +48,7 @@ class Profile extends React.Component {
         return (
             <div>
                 <h1>{this.props.currentUser.username}</h1>
-                {this.newUser.email}
+                {this.props.currentUser.email}
                 {this.props.currentUser.bio}
             </div>
         )

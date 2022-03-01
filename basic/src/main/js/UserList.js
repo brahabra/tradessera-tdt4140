@@ -13,6 +13,7 @@ class UserList extends React.Component{
 					<tr>
 						<th>Username</th>
 						<th>Password</th>
+						<th>Email</th>
 					</tr>
 					{users}
 				</tbody>
@@ -37,6 +38,7 @@ class User extends React.Component{
 			<tr>
 				<td>{this.props.user.username}</td>
 				<td>{this.props.user.password}</td>
+				<td>{this.props.user.email}</td>
 				<td><Button onClick={this.handleDelete}>Delete</Button></td>
 			</tr>
 		)
