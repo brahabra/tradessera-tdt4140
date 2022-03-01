@@ -98,6 +98,11 @@ class App extends React.Component {
 		localStorage.setItem("currentUser", JSON.stringify(currentUser))
 		this.loadPostsFromServer();
 	}
+	
+	onChangeBio(currentUser) {
+		this.state.currentUser = currentUser;
+		//this method is not finished. To be used in profile.js
+	}
 
 	onLogout() {
 		this.state.currentUser = {};
@@ -171,7 +176,7 @@ class App extends React.Component {
 						updatePageSize={this.updatePageSize}/>}/>
 					<Route path='/createPost' element={<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}
 						addPost={this.addPost} currentUser={this.state.currentUser}/>}/>
-					<Route path='/profile' element= {<Profile users={this.state.users} currentUser={this.state.currentUser} onDeleteUser={this.onDeleteUser} onCreateUser={this.onCreateUser}/>} />
+					<Route path='/profile' element= {<Profile users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin} onDeleteUser={this.onDeleteUser} onCreateUser={this.onCreateUser}/>} />
 				</Routes>
 			</Router>
 		)

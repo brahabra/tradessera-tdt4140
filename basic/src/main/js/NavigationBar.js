@@ -1,7 +1,7 @@
 import React from "react";
-import {Navbar, Nav, Container} from 'react-bootstrap';
+import {Navbar} from 'react-bootstrap';
 //import Logo from '../../../Logo.png';
-import {Link} from './components/styles/Form.styled'
+import {Nav, NavMenu, NavLink, NavLogo} from './components/styles/Form.styled'
 
 
 
@@ -10,8 +10,10 @@ import {Link} from './components/styles/Form.styled'
 export default class NavigatonBar extends React.Component {
     render() {
         return (
-            <Navbar bg="dark" variant="dark">
-                
+            <>
+            <Nav>
+                <NavMenu>
+                <NavLogo>
                 <Navbar.Brand href="..">
                     <img 
                     alt=""
@@ -20,25 +22,16 @@ export default class NavigatonBar extends React.Component {
                     height="30"
                     /> {' '} Tradessera
                 </Navbar.Brand>
-                <Nav className="me-auto">
-                <Link>
-                <Nav.Link href="register">Register</Nav.Link>
-                </Link>
-                <Link>
-                <Nav.Link href="login">Login</Nav.Link>
-                </Link>
-                <Link>
-                <Nav.Link href="posts">Posts</Nav.Link>
-                </Link>
-                <Link>
-                <Nav.Link href="createPost">CreatePost</Nav.Link>
-                </Link>
-                <Link>
-                <Nav.Link href="profile">Profile</Nav.Link>
-                </Link>
-                </Nav>
+                </NavLogo>
+                <NavLink to='/register' activeStyle>Register</NavLink>
+                <NavLink to='/login' activeStyle>Login</NavLink>
+                <NavLink to='/posts' activeStyle>Posts</NavLink>
+                <NavLink to='/createPost' activeStyle>CreatePost</NavLink>
+                <NavLink to='/profile' activeStyle>Profile</NavLink>
                 
-            </Navbar>
+                </NavMenu>
+            </Nav>
+            </>
         )
     }
     /*

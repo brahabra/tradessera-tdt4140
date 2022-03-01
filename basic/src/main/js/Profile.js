@@ -22,24 +22,21 @@ class Profile extends React.Component {
         const username = this.props.currentUser.username
         const password = this.props.currentUser.password
         const email = this.props.currentUser.email
+        currentUser = ({username, password, email, bio: this.state.bio});
+        //this.props.onLogin(this.props.currentUser.bio);
+        /*
+        const username = this.props.currentUser.username
+        const password = this.props.currentUser.password
+        const email = this.props.currentUser.email
 
         this.props.onDeleteUser(this.props.currentUser);
         newUser = ({username, password, email, bio: this.state.bio});
         this.props.onCreateUser(newUser)
+        */
 		// clear out the dialog's inputs
 	}
 
     render() {
-        /*
-        if(this.state.email == "") {
-            return  <Form onSubmit={this.handleSubmit}>
-                    <Input type="text" value={this.state.email} placeholder="Enter Email"
-                     onChange={event => this.handleChangeEmail(event)}/>
-                     <Button>Confirm</Button>
-                    </Form>
-                    
-        }
-        */
         /*
         if(this.props.currentUser.bio == null) {
             return <Input />
@@ -50,6 +47,11 @@ class Profile extends React.Component {
                 <h1>{this.props.currentUser.username}</h1>
                 {this.props.currentUser.email}
                 {this.props.currentUser.bio}
+                <Form onSubmit={this.handleSubmit}>
+                    <Input type="text" value={this.state.bio} placeholder="Enter Bio"
+                     onChange={event => this.handleChangeBio(event)}/>
+                     <Button>Confirm</Button>
+                    </Form> 
             </div>
         )
     }

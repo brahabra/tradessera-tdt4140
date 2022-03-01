@@ -71,7 +71,6 @@ class PostList extends React.Component {
 					<tbody>
 						<tr>
 							<th>User</th>
-							<th>Mail</th>
 							<th>Title</th>
 							<th>Text</th>
 						</tr>
@@ -97,6 +96,7 @@ class Post extends React.Component {
 	}
 
 	handleContact() {
+		alert('Contact this user on this email: ' + this.props.post.email);
 		console.log("Contact not impllemented yet"); //implement this later
 	}
 
@@ -113,7 +113,6 @@ class Post extends React.Component {
 		return (
 			<tr>
 				<td>{this.props.post.username}</td>
-				<td>{this.props.post.email}</td>
 				<td>{this.props.post.title}</td>
 				<td>{this.props.post.text}</td>
 
