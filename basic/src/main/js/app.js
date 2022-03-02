@@ -33,6 +33,7 @@ class App extends React.Component {
 		this.onCreate = this.onCreate.bind(this);
 		this.onDelete = this.onDelete.bind(this);
 		this.onNavigate = this.onNavigate.bind(this);
+		this.onUpdateBio = this.onUpdateBio.bind(this);
 	}
 
 	componentDidMount() {
@@ -131,10 +132,18 @@ class App extends React.Component {
 	}
 
 	onDeleteUser(user) {
+		for (let index = 0; index < this.state.posts.length; index++) {
+            const post = this.state.posts[index];
+            if(post.username == user.username){
+                this.onDelete(post);
+            }
+        }
 		client({method: 'DELETE', path: user._links.self.href}).done(response => {
 			this.loadUsersFromServer();
 		});
+		alert(user.username +  " and all it's posts were deleted");
 	}
+
 
 	onDelete(post) {
 		client({method: 'DELETE', path: post._links.self.href}).done(response => {
@@ -159,10 +168,19 @@ class App extends React.Component {
 		}
 	}
 
+	onUpdateBio(newUser, oldUser){
+		this.state.currentUser = newUser;
+		client({method: 'DELETE', path: oldUser._links.self.href}).done(response => {
+			this.loadUsersFromServer();
+		});
+		this.onCreateUser(newUser);
+
+	}
+
 	render() {
 		return (
 			<Router>
-				<NavigationBar />
+				<NavigationBar onLogout={this.onLogout} currentUser={this.state.currentUser}/>
 				<Routes>
 					<Route path='/' element={<Home />}/>
 					<Route path='/login' element={<Login users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin} onLogout={this.onLogout}/>}/>
@@ -176,7 +194,7 @@ class App extends React.Component {
 						updatePageSize={this.updatePageSize}/>}/>
 					<Route path='/createPost' element={<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}
 						addPost={this.addPost} currentUser={this.state.currentUser}/>}/>
-					<Route path='/profile' element= {<Profile users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin} onDeleteUser={this.onDeleteUser} onCreateUser={this.onCreateUser}/>} />
+					<Route path='/profile' element= {<Profile users={this.state.users} currentUser={this.state.currentUser} onUpdateBio={this.onUpdateBio}/>} />
 				</Routes>
 			</Router>
 		)
