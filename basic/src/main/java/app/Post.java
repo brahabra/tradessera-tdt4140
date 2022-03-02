@@ -18,6 +18,7 @@ public class Post {
     private User user;
 
 	private String username;
+	private String email;
     private String title;
     private String text;
 
@@ -26,6 +27,7 @@ public class Post {
     public Post(String title, String text, User user) {
 		this.user = user;
 		this.username = user.getUsername();
+		this.email = user.getEmail();
 		this.title = title;
 		this.text = text;
 	}
@@ -41,6 +43,10 @@ public class Post {
 
 	public String getUsername() {
 		return username;
+	}
+
+	public String getEmail() {
+		return email;
 	}
 
 	public void setUser(User user) {
@@ -73,10 +79,11 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Employee{" +
+		return "Post{" +
 			"id=" + id +
-			", username='" + title + '\'' +
-			", password='" + text + '\'' +
+			", Title='" + title + '\'' +
+			", text='" + text + '\'' +
+			", username='" + username + '\'' +
 			'}';
 	}
 }
