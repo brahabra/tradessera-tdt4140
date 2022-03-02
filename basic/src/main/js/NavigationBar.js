@@ -1,16 +1,25 @@
 import React from "react";
-import {Navbar, Nav, Container} from 'react-bootstrap';
+import { Link } from 'react-router-dom'
+import {Navbar, Form, Button, ButtonGroup} from 'react-bootstrap';
 //import Logo from '../../../Logo.png';
-
-
-
-
+import {Nav, NavMenu, NavLink, NavLogo, NavLogin} from './components/styles/Form.styled'
 
 export default class NavigatonBar extends React.Component {
     render() {
+        let logInOrOut;
+        if(this.props.currentUser.username != null){
+            logInOrOut = <Button onClick={this.props.onLogout}>Log out</Button>;
+        } else {
+            logInOrOut = <ButtonGroup>
+                        <Button as={Link} to="/login">Login  </Button>
+                        <Button as={Link} to="/register">Register</Button>
+                        </ButtonGroup>;
+        }
         return (
-            <Navbar bg="dark" variant="dark">
-                <Container>
+            <>
+            <Nav>
+                <NavMenu>
+                <NavLogo>
                 <Navbar.Brand href="..">
                     <img 
                     alt=""
@@ -19,16 +28,25 @@ export default class NavigatonBar extends React.Component {
                     height="30"
                     /> {' '} Tradessera
                 </Navbar.Brand>
-                <Nav className="me-auto">
-                <Nav.Link href="..">Home</Nav.Link>
-                <Nav.Link href="register">Register</Nav.Link>
-                <Nav.Link href="login">Login</Nav.Link>
-                <Nav.Link href="users">Users</Nav.Link>
-                <Nav.Link href="posts">Posts</Nav.Link>
-                <Nav.Link href="createPost">CreatePost</Nav.Link>
-                </Nav>
-                </Container>
-            </Navbar>
+                </NavLogo>
+                
+                <NavLink to='/posts' >Posts</NavLink>
+                <NavLink to='/createPost' >CreatePost</NavLink>
+                <NavLink to='/profile' >Profile</NavLink>
+                
+                </NavMenu>
+                <NavLogin>{logInOrOut}</NavLogin>
+
+            </Nav>
+            </>
         )
-    }   
+    }
+    /*
+    <Link>
+                <Nav.Link href="..">Home</Nav.Link>
+                </Link>
+    <Link>
+                <Nav.Link href="users">Users</Nav.Link>
+                </Link>
+    */   
 }

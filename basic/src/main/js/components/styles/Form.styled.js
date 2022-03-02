@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink as Link } from 'react-router-dom';
 
 export const Form = styled.form`
   width: 1000px;
@@ -47,5 +48,63 @@ export const Input = styled.input`
   :focus,
   :hover {
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.15), 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+`;
+
+export const NavLink = styled(Link)`
+  color: #808080;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 150%;
+  &.active {
+    color: #000000;
+  }
+`;
+
+export const Nav = styled.nav`
+  background: #ffe285;
+  height: 85px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.2rem calc((100vw - 1000px) / 2);
+  z-index: 12;
+  /* Third Nav */
+  /* justify-content: flex-start; */
+`;
+
+export const NavMenu = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: -24px;
+  /* Second Nav */
+  /* margin-right: 24px; */
+  /* Third Nav */
+  /* width: 100vw;
+  white-space: nowrap; */
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
+export const NavLogo = styled.div`
+  margin-right: 11rem;
+  font-weight: 900;
+  font-size: 150%;
+`;
+
+export const NavLogin = styled.div`
+  text-decoration:none
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  
+  &.active {
+    color: #000000;
   }
 `;

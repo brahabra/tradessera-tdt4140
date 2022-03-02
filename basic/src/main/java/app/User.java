@@ -17,15 +17,17 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
+	private String bio;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Collection<Post> posts = new ArrayList<>();
 
 	public User() {}
 	
-	public User(String username, String password, String email) {
+	public User(String username, String password, String email, String bio) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.bio = bio;
 	}
 
 	@Override
@@ -75,6 +77,14 @@ public class User {
 
 	public Collection<Post> getPosts() {
 		return posts;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
+	public String getBio() {
+		return bio;
 	}
 
 	@Override

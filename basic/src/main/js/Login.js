@@ -30,13 +30,15 @@ class Login extends React.Component {
                 if(element.password == this.state.pass){
                     alert('You have sucessfully logged in ' + this.state.uname);
                     this.props.onLogin(element);
+					this.state.uname = '';
+					this.state.pass = '';
+					return;
                 } else{
                     alert('Wrong password, please try again');
                 }
             }
         }
-		this.state.uname = '';
-		this.state.pass = '';
+		alert('Username not found, please try again');
 	}
 
 	handleLogout(event) {
@@ -49,7 +51,7 @@ class Login extends React.Component {
 			return <div>
 				{this.props.currentUser.username} is loggged in
 				<br></br>
-				<button onClick={this.handleLogout}>Log out</button>
+				<Button onClick={this.handleLogout}>Log out</Button>
 			</div>;
 		}
 		return (
