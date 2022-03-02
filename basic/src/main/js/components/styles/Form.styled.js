@@ -92,7 +92,19 @@ export const NavMenu = styled.div`
 `;
 
 export const NavLogo = styled.div`
-  margin-right: 8rem;
+  margin-right: 11rem;
   font-weight: 900;
   font-size: 150%;
+`;
+
+export const NavLogin = styled.div`
+  text-decoration:none
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  
+  &.active {
+    color: #000000;
+  }
 `;

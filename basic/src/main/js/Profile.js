@@ -50,7 +50,7 @@ class Profile extends React.Component {
                     <Input type="text" value={this.state.bio} placeholder="Enter Bio"
                      onChange={event => this.handleChangeBio(event)}/>
                      <Button>Confirm</Button>
-                </Form> 
+                </Form>
             </div>
         )
     }

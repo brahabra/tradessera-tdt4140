@@ -2,11 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom'
 import {Navbar, Form, Button, ButtonGroup} from 'react-bootstrap';
 //import Logo from '../../../Logo.png';
-import {Nav, NavMenu, NavLink, NavLogo} from './components/styles/Form.styled'
-
-
-
-
+import {Nav, NavMenu, NavLink, NavLogo, NavLogin} from './components/styles/Form.styled'
 
 export default class NavigatonBar extends React.Component {
     render() {
@@ -15,7 +11,7 @@ export default class NavigatonBar extends React.Component {
             logInOrOut = <Button onClick={this.props.onLogout}>Log out</Button>;
         } else {
             logInOrOut = <ButtonGroup>
-                        <Button as={Link} to="/login">Login</Button>
+                        <Button as={Link} to="/login">Login  </Button>
                         <Button as={Link} to="/register">Register</Button>
                         </ButtonGroup>;
         }
@@ -33,14 +29,13 @@ export default class NavigatonBar extends React.Component {
                     /> {' '} Tradessera
                 </Navbar.Brand>
                 </NavLogo>
-                <NavLink to='/register'>Register</NavLink>
-                <NavLink to='/login' >Login</NavLink>
+                
                 <NavLink to='/posts' >Posts</NavLink>
                 <NavLink to='/createPost' >CreatePost</NavLink>
                 <NavLink to='/profile' >Profile</NavLink>
                 
                 </NavMenu>
-                {logInOrOut}
+                <NavLogin>{logInOrOut}</NavLogin>
 
             </Nav>
             </>
