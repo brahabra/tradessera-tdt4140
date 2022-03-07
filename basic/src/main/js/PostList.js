@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Button} from "./components/styles/Form.styled"
+import {Button, Input} from "./components/styles/Form.styled"
 
 const ReactDOM = require('react-dom');
 
@@ -8,11 +8,13 @@ class PostList extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.state = {search: ""};
 		this.handleNavFirst = this.handleNavFirst.bind(this);
 		this.handleNavPrev = this.handleNavPrev.bind(this);
 		this.handleNavNext = this.handleNavNext.bind(this);
 		this.handleNavLast = this.handleNavLast.bind(this);
 		this.handleInput = this.handleInput.bind(this);
+		this.handleSearch = this.handleSearch.bind(this);
 	}
 
 	handleInput(e) {
@@ -45,6 +47,11 @@ class PostList extends React.Component {
 		e.preventDefault();
 		this.props.onNavigate(this.props.links.last.href);
 	}
+	
+	handleSearch(event) {
+		let {value} = event.target;
+		this.setState({search: value});
+	}
 
 	render() {
 		const posts = this.props.posts.map(post =>
@@ -67,6 +74,8 @@ class PostList extends React.Component {
 
 		return (
 			<div>
+				<Input type="text" value={this.state.search} placeholder="Search for title..."
+				onChange={event => this.handleSearch(event)} />
 				<table>
 					<tbody>
 						<tr>
@@ -74,7 +83,11 @@ class PostList extends React.Component {
 							<th>Title</th>
 							<th>Text</th>
 						</tr>
-						{posts}
+						{posts.filter((val) => {
+							if (val.props.post.title.toLowerCase().includes(this.state.search.toLowerCase())) {
+								return val
+							}
+						})}
 					</tbody>
 				</table>
 			</div>
@@ -109,7 +122,8 @@ class Post extends React.Component {
 			button = <Button onClick={this.handleContact}>Contact</Button>;
 		}
 		
-		console.log(this.props.currentUser);
+		
+		console.log(this.state.search);
 		return (
 			<tr>
 				<td>{this.props.post.username}</td>

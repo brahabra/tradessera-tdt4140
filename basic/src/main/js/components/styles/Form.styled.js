@@ -73,6 +73,7 @@ export const Nav = styled.nav`
   justify-content: space-between;
   padding: 0.2rem calc((100vw - 1000px) / 2);
   z-index: 12;
+  margin-bottom: 0.9rem;
   /* Third Nav */
   /* justify-content: flex-start; */
 `;
