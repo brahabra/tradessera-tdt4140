@@ -73,10 +73,10 @@ class PostList extends React.Component {
 		}
 
 		return (
-			<div>
+			<div className='container'>
 				<Input type="text" value={this.state.search} placeholder="Search for title..."
 				onChange={event => this.handleSearch(event)} />
-				<table>
+				<table className="table table-bordered">
 					<tbody>
 						<tr>
 							<th>User</th>
