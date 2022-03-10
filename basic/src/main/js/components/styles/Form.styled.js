@@ -20,7 +20,7 @@ export const Button = styled.button`
   color: rgb(253, 249, 243);
   font-weight: 600;
   text-transform: uppercase;
-  background: #f03d4e;
+  background: #219e;
   border: none;
   border-radius: 3px;
   outline: 0;
@@ -29,7 +29,7 @@ export const Button = styled.button`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-out;
   :hover {
-    background: rgb(200, 50, 70);
+    background: #219ebc;
   }
 `;
 
@@ -67,7 +67,7 @@ export const NavLink = styled(Link)`
 `;
 
 export const Nav = styled.nav`
-  background: #ffe285;
+  background: #ffb703;
   height: 85px;
   display: flex;
   justify-content: space-between;
