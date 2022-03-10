@@ -24,6 +24,7 @@ public class Post {
 	private int price;
 	private String location;
 	private String eventType;
+	private int rating;
 
 	public Post() {}
 
@@ -36,11 +37,20 @@ public class Post {
 		this.price = price;
 		this.location = location;
 		this.eventType = eventType;
+		this.rating = user.getRating();
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, user, title, text, price, location, eventType);
+		return Objects.hash(id, user, title, text, price, location, eventType, rating);
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
 	public String getEventType() {
@@ -115,6 +125,7 @@ public class Post {
 			", text='" + text + '\'' +
 			", username='" + username + '\'' +
 			", price='" + String.valueOf(price) + '\'' +
+			", rating='" + String.valueOf(rating) + '\'' +
 			'}';
 	}
 }

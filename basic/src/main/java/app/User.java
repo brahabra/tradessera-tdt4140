@@ -18,6 +18,7 @@ public class User {
 	private String password;
 	private String email;
 	private String bio;
+	private int rating;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Collection<Post> posts = new ArrayList<>();
 
@@ -28,6 +29,7 @@ public class User {
 		this.password = password;
 		this.email = email;
 		this.bio = bio;
+		this.rating = 0;
 	}
 
 	@Override
@@ -37,6 +39,14 @@ public class User {
 
 	public Long getId() {
 		return id;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
 	public void setId(Long id) {
@@ -94,6 +104,7 @@ public class User {
 			", username='" + username + '\'' +
 			", password='" + password + '\'' +
 			", email='" + email + '\'' +
+			", rating='" + rating + '\'' +
 			'}';
 	}
 }
