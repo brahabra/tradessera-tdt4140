@@ -41,7 +41,7 @@ class Profile extends React.Component {
         }
         */
         return (
-            <div>
+            <div className='container'>
                 <h1>{this.props.currentUser.username}</h1>
                 {this.props.currentUser.email}
                 <br></br>

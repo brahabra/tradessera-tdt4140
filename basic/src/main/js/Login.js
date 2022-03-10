@@ -48,7 +48,7 @@ class Login extends React.Component {
     
 	render() {
 		if(this.props.currentUser.username != null){
-			return <div>
+			return <div className='container'>
 				{this.props.currentUser.username} is loggged in
 				<br></br>
 				<Button onClick={this.handleLogout}>Log out</Button>

@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { NavLink as Link } from 'react-router-dom';
 
 export const Form = styled.form`
-  width: 1000px;
+  width: 1200px;
   margin: 0 auto;
 `
 
 export const Header = styled.header`
-  width: 1000px;
+  width: 1200px;
   margin: 0 auto;
   margin-bottom: 0.6rem;
   font-weight: 900;
@@ -37,7 +37,7 @@ export const Input = styled.input`
   max-width: 100%;
   padding: 11px 13px;
   background: #f9f9fa;
-  color: #f03d4e;
+  color: #219ebc;
   margin-bottom: 0.9rem;
   border-radius: 4px;
   outline: 0;
