@@ -22,12 +22,12 @@ public class Post {
     private String title;
     private String text;
 	private int price;
-
 	private String location;
+	private String eventType;
 
 	public Post() {}
 
-    public Post(String title, String text, User user, int price, String location) {
+    public Post(String title, String text, User user, int price, String location, String eventType) {
 		this.user = user;
 		this.username = user.getUsername();
 		this.email = user.getEmail();
@@ -35,11 +35,20 @@ public class Post {
 		this.text = text;
 		this.price = price;
 		this.location = location;
+		this.eventType = eventType;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, user, title, text, price, location);
+		return Objects.hash(id, user, title, text, price, location, eventType);
+	}
+
+	public String getEventType() {
+		return eventType;
+	}
+
+	public void setEventType(String eventType) {
+		this.eventType = eventType;
 	}
 
 	public String getLocation() {

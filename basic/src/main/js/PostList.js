@@ -75,6 +75,7 @@ class PostList extends React.Component {
 							<th>Text</th>
 							<th>Price</th>
 							<th>Location</th>
+							<th>EventType</th>
 						</tr>
 						{posts}
 					</tbody>
@@ -119,6 +120,7 @@ class Post extends React.Component {
 				<td>{this.props.post.text}</td>
 				<td>{this.props.post.price}</td>
 				<td>{this.props.post.location}</td>
+				<td>{this.props.post.eventType}</td>
 
 				<td>{button}</td>
 			</tr>
