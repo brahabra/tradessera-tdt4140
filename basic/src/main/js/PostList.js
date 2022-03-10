@@ -128,14 +128,14 @@ class PostList extends React.Component {
 				<table className="table table-bordered">
 					<tbody>
 						<tr>
-							<th onClick={this.handleSort(0)}>User</th>
-							<th onClick={this.handleSort(1)}>Title</th>
-							<th onClick={this.handleSort(2)}>Text</th>
+							<th onClick={() => this.handleSort(0)}>User</th>
+							<th onClick={() => this.handleSort(1)}>Title</th>
+							<th onClick={() => this.handleSort(2)}>Text</th>
 						</tr>
 						<tr>
-							<th> <Button onClick={this.handleSort(1)}>Sort User</Button> </th>
-							<th> <Button onClick={this.handleSort(2)}>Sort Title</Button> </th>
-							<th> <Button onClick={this.handleSort(3)}>Sort Text</Button> </th>
+							<th> <Button onClick={() => this.handleSort(0)}>Sort User</Button> </th>
+							<th> <Button onClick={() => this.handleSort(1)}>Sort Title</Button> </th>
+							<th> <Button onClick={() => this.handleSort(2)}>Sort Text</Button> </th>
 						</tr>
 						{posts.filter((val) => {
 							if (val.props.post.title.toLowerCase().includes(this.state.search.toLowerCase())) {
