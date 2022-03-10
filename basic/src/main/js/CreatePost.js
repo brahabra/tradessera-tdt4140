@@ -7,10 +7,16 @@ class CreatePost extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {title: '', text: ''}
+		this.state = {title: '', text: '', price: ''}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChangeTitle = this.handleChangeTitle.bind(this);
 		this.handleChangeText = this.handleChangeText.bind(this);
+		this.handleChangePrice = this.handleChangePrice.bind(this);
+	}
+
+	handleChangePrice(event) {
+		let {value} = event.target;
+		this.setState({price: value});
 	}
 
 	handleChangeTitle(event){
@@ -25,12 +31,13 @@ class CreatePost extends React.Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		const newPost = {title: this.state.title, text: this.state.text, user: this.props.currentUser};
+		const newPost = {title: this.state.title, text: this.state.text, price: this.state.price, user: this.props.currentUser};
 		this.props.onCreate(newPost);
 
 		// clear out the dialog's inputs
 		this.state.title = '';
 		this.state.text = '';
+		this.state.price = '';
 	}
 
 	render() {
@@ -48,6 +55,11 @@ class CreatePost extends React.Component {
 					<label>
 						<Input type="text" value={this.state.text} placeholder="Text"
 							onChange={event => this.handleChangeText(event)}/>
+					</label>
+					<br></br>
+					<label>
+						<Input type="text" value={this.state.price} placeholder="Price"
+							onChange={event => this.handleChangePrice(event)}/>
 					</label>
 					<br></br>
 					<Button onClick={this.handleSubmit}>Create</Button>

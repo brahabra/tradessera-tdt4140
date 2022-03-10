@@ -21,20 +21,30 @@ public class Post {
 	private String email;
     private String title;
     private String text;
+	private int price;
 
 	public Post() {}
 
-    public Post(String title, String text, User user) {
+    public Post(String title, String text, User user, int price) {
 		this.user = user;
 		this.username = user.getUsername();
 		this.email = user.getEmail();
 		this.title = title;
 		this.text = text;
+		this.price = price;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, user, title, text);
+		return Objects.hash(id, user, title, text, price);
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public User getUser() {
@@ -84,6 +94,7 @@ public class Post {
 			", Title='" + title + '\'' +
 			", text='" + text + '\'' +
 			", username='" + username + '\'' +
+			", price='" + String.valueOf(price) + '\'' +
 			'}';
 	}
 }
