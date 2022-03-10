@@ -23,20 +23,31 @@ public class Post {
     private String text;
 	private int price;
 
+	private String location;
+
 	public Post() {}
 
-    public Post(String title, String text, User user, int price) {
+    public Post(String title, String text, User user, int price, String location) {
 		this.user = user;
 		this.username = user.getUsername();
 		this.email = user.getEmail();
 		this.title = title;
 		this.text = text;
 		this.price = price;
+		this.location = location;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, user, title, text, price);
+		return Objects.hash(id, user, title, text, price, location);
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public int getPrice() {
