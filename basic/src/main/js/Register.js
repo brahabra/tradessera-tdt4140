@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, Input} from "./components/styles/Form.styled"
+import { LoginForm, Button, Input} from "./components/styles/Form.styled"
 
 class Register extends React.Component{
     
@@ -48,7 +48,8 @@ class Register extends React.Component{
     
 	render() {
 		return (
-				<Form onSubmit={this.handleSubmit}>
+			<div className="container">
+				<LoginForm onSubmit={this.handleSubmit}>
 					<label>
 						<Input type="text" value={this.state.uname} placeholder="Enter Username"
 						 onChange={event => this.handleChangeName(event)} />
@@ -65,7 +66,8 @@ class Register extends React.Component{
 					</label>
 					<br></br>
 					<Button>Register</Button>
-				</Form>
+				</LoginForm>
+			</div>
 		)
 	}
 }

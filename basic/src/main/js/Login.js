@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, Input} from "./components/styles/Form.styled"
+import { LoginForm, Button, Input} from "./components/styles/Form.styled"
 
 class Login extends React.Component {
     
@@ -55,7 +55,8 @@ class Login extends React.Component {
 			</div>;
 		}
 		return (
-				<Form onSubmit={this.handleSubmit}>
+			<div className="container">
+				<LoginForm onSubmit={this.handleSubmit}>
 					<label>
 						<Input type="text" value={this.state.uname} placeholder="Enter Username"
 						 onChange={event => this.handleChangeName(event)} />
@@ -67,7 +68,8 @@ class Login extends React.Component {
 					</label>
 					<br></br>
 					<Button>Login</Button>
-				</Form>
+				</LoginForm>
+			</div>
 		)
 	}
 }
