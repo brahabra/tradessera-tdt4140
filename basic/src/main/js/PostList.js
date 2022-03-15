@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Link } from 'react-router-dom'
 import {Button} from "./components/styles/Form.styled"
 
 const ReactDOM = require('react-dom');
@@ -48,7 +49,7 @@ class PostList extends React.Component {
 
 	render() {
 		const posts = this.props.posts.map(post =>
-			<Post key={post._links.self.href} post={post} onDelete={this.props.onDelete} currentUser={this.props.currentUser}/>
+			<Post key={post._links.self.href} post={post} users={this.props.users} onDelete={this.props.onDelete} currentUser={this.props.currentUser}  onNavProfile={this.props.onNavProfile}/>
 		);
 
 		const navLinks = [];
@@ -93,6 +94,7 @@ class Post extends React.Component {
 		this.state = {username: ''};
 		this.handleDelete = this.handleDelete.bind(this);
 		this.handleContact = this.handleContact.bind(this);
+		this.handleNavigate = this.handleNavigate.bind(this);
 	}
 
 	handleDelete() {
@@ -104,19 +106,28 @@ class Post extends React.Component {
 		console.log("Contact not impllemented yet"); //implement this later
 	}
 
+	handleNavigate() {
+		console.log("Updated profile user");
+		this.props.users.forEach(user => {
+            if (user.username == this.props.post.username) {
+				this.props.onNavProfile(user);
+			}
+        });
+
+	}
+
 	render() {
 		let button;
 		if(this.props.post.username == this.props.currentUser.username){
 			button = <Button onClick={this.handleDelete}>Delete</Button>;
 		}
-		else{
+		else {
 			button = <Button onClick={this.handleContact}>Contact</Button>;
 		}
 		
-		console.log(this.props.currentUser);
 		return (
 			<tr>
-				<td>{this.props.post.username}</td>
+				<td onClick={() => this.handleNavigate()}><Link to="/userProfile">{this.props.post.username}</Link></td>
 				<td>{this.props.post.title}</td>
 				<td>{this.props.post.text}</td>
 				<td>{this.props.post.price}</td>

@@ -7,7 +7,7 @@ class CreatePost extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {title: '', text: '', price: ''}
+		this.state = {title: '', text: '', price: '', location: '', eventType: ''}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChangeTitle = this.handleChangeTitle.bind(this);
 		this.handleChangeText = this.handleChangeText.bind(this);

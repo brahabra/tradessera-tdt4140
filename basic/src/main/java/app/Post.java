@@ -25,10 +25,12 @@ public class Post {
 	private String location;
 	private String eventType;
 	private int rating;
+	private boolean closed;
 
 	public Post() {}
 
-    public Post(String title, String text, User user, int price, String location, String eventType) {
+    public Post(String title, String text, User user, int price, String location, String eventType, String... closed) {
+		boolean closed1 = closed.length > 0 ? true : false;
 		this.user = user;
 		this.username = user.getUsername();
 		this.email = user.getEmail();
@@ -38,6 +40,7 @@ public class Post {
 		this.location = location;
 		this.eventType = eventType;
 		this.rating = user.getRating();
+		this.closed = closed1;
 	}
 
 	@Override
