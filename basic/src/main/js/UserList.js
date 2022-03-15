@@ -8,17 +8,19 @@ class UserList extends React.Component{
 			<User key={user._links.self.href} user={user} onDeleteUser={this.props.onDeleteUser}/>
 		);
 		return (
-			<table>
-				<tbody>
-					<tr>
-						<th>Username</th>
-						<th>Password</th>
-						<th>Email</th>
-						<th>Bio</th>
-					</tr>
-					{users}
-				</tbody>
-			</table>
+			<div className='container'>
+				<table className="table table-bordered">
+					<tbody>
+						<tr>
+							<th>Username</th>
+							<th>Password</th>
+							<th>Email</th>
+							<th>Bio</th>
+						</tr>
+						{users}
+					</tbody>
+				</table>
+			</div>
 		)
 	}
 }
