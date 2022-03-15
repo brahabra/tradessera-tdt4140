@@ -72,10 +72,12 @@ class PostList extends React.Component {
 						<tr>
 							<th>User</th>
 							<th>Title</th>
-							<th>Text</th>
 							<th>Price</th>
 							<th>Location</th>
-							<th>EventType</th>
+							<th>Type of Event</th>
+							<th>Date of Event</th>
+							<th>Time of Event</th>
+							<th>Comment</th>
 						</tr>
 						{posts}
 					</tbody>
@@ -117,11 +119,12 @@ class Post extends React.Component {
 			<tr>
 				<td>{this.props.post.username}</td>
 				<td>{this.props.post.title}</td>
-				<td>{this.props.post.text}</td>
 				<td>{this.props.post.price}</td>
 				<td>{this.props.post.location}</td>
 				<td>{this.props.post.eventType}</td>
-
+				<td>{this.props.post.dateOfEvent}</td>
+				<td>{this.props.post.timeOfEvent}</td>
+				<td>{this.props.post.comment}</td>
 				<td>{button}</td>
 			</tr>
 		)
