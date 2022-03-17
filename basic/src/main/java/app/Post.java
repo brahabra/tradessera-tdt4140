@@ -26,10 +26,13 @@ public class Post {
 	private String dateOfEvent;
 	private String timeOfEvent;
 	private String comment;
+	private int rating;
+	private boolean closed;
 
 	public Post() {}
 
-    public Post(String title, User user, int price, String location, String eventType, String dateOfEvent, String timeOfEvent, String comment) {
+    public Post(String title, User user, int price, String location, String eventType, String dateOfEvent, String timeOfEvent, String comment, String... closed) {
+		boolean closed1 = closed.length > 0 ? true : false;
 		this.user = user;
 		this.username = user.getUsername();
 		this.email = user.getEmail();
@@ -40,11 +43,13 @@ public class Post {
 		this.dateOfEvent = dateOfEvent;
 		this.timeOfEvent = timeOfEvent;
 		this.comment = comment;
+		this.rating = user.getRating();
+		this.closed = closed1;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, user, title, price, location, eventType, dateOfEvent, timeOfEvent, comment);
+		return Objects.hash(id, user, title, price, location, eventType, dateOfEvent, timeOfEvent, comment, rating);
 	}
 
 	public String getTimeOfEvent() {
@@ -61,6 +66,14 @@ public class Post {
 	
 	public void setDateOfEvent(String dateOfEvent) {
 		this.dateOfEvent = dateOfEvent;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
 	public String getEventType() {
@@ -134,6 +147,7 @@ public class Post {
 			", Title='" + title + '\'' +
 			", username='" + username + '\'' +
 			", price='" + String.valueOf(price) + '\'' +
+			", rating='" + String.valueOf(rating) + '\'' +
 			'}';
 	}
 }
