@@ -99,12 +99,12 @@ class CreatePost extends React.Component {
 					</label>
 					<br></br>
 					<label>
-						<Input type="text" value={this.state.dateOfEvent} placeholder="Date of Event"
+						<Input type="date" value={this.state.dateOfEvent} placeholder="Date of Event"
 							onChange={event => this.handleChangeDateOfEvent(event)}/>
 					</label>
 					<br></br>
 					<label>
-						<Input type="text" value={this.state.timeOfEvent} placeholder="Time of Event"
+						<Input type="time" value={this.state.timeOfEvent} placeholder="Time of Event"
 							onChange={event => this.handleChangeTimeOfEvent(event)}/>
 					</label>
 					<br></br>

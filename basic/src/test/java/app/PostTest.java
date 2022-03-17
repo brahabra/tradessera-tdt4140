@@ -16,7 +16,7 @@ public class PostTest {
 	public void setUp() throws Exception {
         this.user1 = new User("userone", "passone", "user1@ntnu.no","Hei", 0, 0);
         this.user2 = new User("usertwo", "passtwo", "user2@ntnu.no","Hå", 0, 0);
-        this.post1 = new Post("titleone", "textone", this.user1, 200, "Trondhiem", "Konsert");
+        this.post1 = new Post("titleone", this.user1, 200, "Trondhiem", "Konsert", "20.04.22", "18:30", "commentone");
     }
 
     @Test
@@ -37,10 +37,10 @@ public class PostTest {
     }
 
     @Test
-    @DisplayName ("Test text")
-    public void testText() {
-        assertEquals("textone", this.post1.getText(), "The text is not as expected");
-        this.post1.setText("newtext");
-        assertEquals("newtext", this.post1.getText(), "The text should be chaanged now");
+    @DisplayName ("Test comment")
+    public void testComment() {
+        assertEquals("commentone", this.post1.getComment(), "The comment is not as expected");
+        this.post1.setComment("newcomment");
+        assertEquals("newcomment", this.post1.getComment(), "The comment should be chaanged now");
     } 
 }
