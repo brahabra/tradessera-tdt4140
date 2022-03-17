@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-import {Button, Input, TableStyles} from "./components/styles/Form.styled"
+import {Button, Input, TableStyles, TableHeadStyles} from "./components/styles/Form.styled"
 
 const ReactDOM = require('react-dom');
 
@@ -122,27 +122,25 @@ class PostList extends React.Component {
 		}
 
 		return (
-			<div className='container'>
+			<div className='container'>  
 				<Input type="text" value={this.state.search} placeholder="Search for title..."
 				onChange={event => this.handleSearch(event)} />
 				<table className="table table-bordered">
-					<tbody>
-						<TableStyles>
+					<TableHeadStyles>
+						<tr>
 							<th onClick={() => this.handleSort(0)}>User</th>
 							<th onClick={() => this.handleSort(1)}>Title</th>
 							<th onClick={() => this.handleSort(2)}>Text</th>
-						</TableStyles>
-						<tr>
-							<th> <Button onClick={() => this.handleSort(0)}>Sort User</Button> </th>
-							<th> <Button onClick={() => this.handleSort(1)}>Sort Title</Button> </th>
-							<th> <Button onClick={() => this.handleSort(2)}>Sort Text</Button> </th>
 						</tr>
-						{posts.filter((val) => {
-							if (val.props.post.title.toLowerCase().includes(this.state.search.toLowerCase())) {
-								return val
-							}
-						})}
-					</tbody>
+						<tbody>
+							{posts.filter((val) => {
+								if (val.props.post.title.toLowerCase().includes(this.state.search.toLowerCase())) {
+									return val
+									}
+							})}
+							
+						</tbody>
+					</TableHeadStyles>
 				</table>
 			</div>
 		)
@@ -178,13 +176,15 @@ class Post extends React.Component {
 		
 		console.log(this.state.search);
 		return (
-			<tr>
-				<td>{this.props.post.username}</td>
-				<td>{this.props.post.title}</td>
-				<td>{this.props.post.text}</td>
+				
+				<tr>
+					<td>{this.props.post.username}</td>
+					<td>{this.props.post.title}</td>
+					<td>{this.props.post.text}</td>
 
-				<td>{button}</td>
-			</tr>
+					<td>{button}</td>
+				</tr>
+					
 		)
 	}
 }
@@ -209,3 +209,6 @@ export {PostList}
 			setorder("ASC")
 		}
 	}
+
+	/*className="table table-bordered"*/
+	/*'*/

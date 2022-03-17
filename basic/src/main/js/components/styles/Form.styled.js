@@ -114,9 +114,22 @@ export const NavLogin = styled.div`
   
 `;
 
-export const TableStyles = styled.tr`
+export const TableHeadStyles = styled.tr`
+  background: white;
+  text-align: center;
+  font-style: italic;
 
-  background: rgb(252,255,215);
-  background: radial-gradient(circle, rgba(252,255,215,1) 0%, rgba(255,204,75,1) 100%);
+
+  th {
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,201,54,1) 100%);
+    font-size: 23px;
+    text-align: center;
+  }
+
+`;
+
+export const TableStyles = styled.tr`
+  background: rgb(255,255,255);
 
 `;
