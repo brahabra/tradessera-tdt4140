@@ -15,6 +15,13 @@ export default class NavigatonBar extends React.Component {
                         <Button as={Link} to="/register">Register</Button>
                         </div>;
         }
+        let admin;
+        if(this.props.currentUser.admin){
+            admin = <div><NavLink to='/admin' >Admin</NavLink>
+                        <NavLink to='/users' >Users</NavLink></div>;
+        } else {
+            admin = <div></div>;
+        }
         return (
             <>
             <Nav>
@@ -33,6 +40,7 @@ export default class NavigatonBar extends React.Component {
                 <NavLink to='/posts' >Posts</NavLink>
                 <NavLink to='/createPost' >CreatePost</NavLink>
                 <NavLink to='/profile' >Profile</NavLink>
+                {admin}
                 
                 </NavMenu>
                 <NavLogin>{logInOrOut}</NavLogin>

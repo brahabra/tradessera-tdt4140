@@ -4,6 +4,8 @@ import {UserList} from './UserList';
 import {PostList} from './PostList';
 import {CreatePost} from './CreatePost';
 import {Profile} from './Profile';
+import {AdminPage} from './AdminPage';
+import {UserProfile} from './UserProfile';
 
 import NavigationBar from './NavigationBar';
 import Home from "./Home";
@@ -24,7 +26,7 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {users: [], currentUser: JSON.parse(localStorage.getItem("currentUser")) || {}, posts: [], attributes: [], pageSize: 2, links: {}};
+		this.state = {users: [], currentUser: JSON.parse(localStorage.getItem("currentUser")) || {}, posts: [], attributes: [], pageSize: 2, links: {}, profileUser: JSON.parse(localStorage.getItem("profileUser")) || {}};
 		this.onCreateUser = this.onCreateUser.bind(this);
 		this.onLogin = this.onLogin.bind(this);
 		this.onLogout = this.onLogout.bind(this);
@@ -32,8 +34,11 @@ class App extends React.Component {
 		this.updatePageSize = this.updatePageSize.bind(this);
 		this.onCreate = this.onCreate.bind(this);
 		this.onDelete = this.onDelete.bind(this);
+		//this.onClose = this.onClose.bind(this);
 		this.onNavigate = this.onNavigate.bind(this);
-		this.onUpdateBio = this.onUpdateBio.bind(this);
+		this.onUpdateUser = this.onUpdateUser.bind(this);
+		this.onUpdateRating = this.onUpdateRating.bind(this);
+		this.onNavProfile = this.onNavProfile.bind(this);
 	}
 
 	componentDidMount() {
@@ -150,7 +155,14 @@ class App extends React.Component {
 			this.loadPostsFromServer(this.state.pageSize);
 		});
 	}
-
+/* fix later
+	onClose(post) {
+		post.closed = true;
+		client({method: 'PUT', path: post._links.self.href, entity: post, headers: {'Content-Type': 'application/json'}}).done(response => {
+			this.loadPostsFromServer();
+		});
+	}
+*/
 	onNavigate(navUri) {
 		client({method: 'GET', path: navUri}).done(postCollection => {
 			this.setState({
@@ -168,13 +180,29 @@ class App extends React.Component {
 		}
 	}
 
-	onUpdateBio(newUser, oldUser){
-		this.state.currentUser = newUser;
-		client({method: 'DELETE', path: oldUser._links.self.href}).done(response => {
+	onUpdateUser(newUser, oldUser, update){
+		client({method: 'PUT', path: oldUser._links.self.href, entity: newUser, headers: {'Content-Type': 'application/json'}}).done(response => {
 			this.loadUsersFromServer();
 		});
-		this.onCreateUser(newUser);
+		if(update){
+			this.state.currentUser = newUser;
+			localStorage.setItem("currentUser", JSON.stringify(this.state.currentUser));
+		}
+	}
 
+	onUpdateRating(newUser, oldUser){
+		client({method: 'PUT', path: oldUser._links.self.href, entity: newUser, headers: {'Content-Type': 'application/json'}}).done(response => {
+			this.loadUsersFromServer();
+		});
+		this.state.profileUser = newUser;
+		localStorage.setItem("profileUser", JSON.stringify(this.state.profileUser));
+		window.location.reload(false);
+	}
+
+	onNavProfile(user){
+		this.state.profileUser = user;
+		localStorage.setItem("profileUser", JSON.stringify(this.state.profileUser));
+		window.location.reload(false);
 	}
 
 	render() {
@@ -185,9 +213,9 @@ class App extends React.Component {
 				<Routes>
 					<Route path='/' element={<Home />}/>
 					<Route path='/login' element={<Login users={this.state.users} currentUser={this.state.currentUser} onLogin={this.onLogin} onLogout={this.onLogout}/>}/>
-					<Route path='/users' element={<UserList users={this.state.users} onDeleteUser={this.onDeleteUser}/>}/>
+					<Route path='/users' element={<UserList users={this.state.users} onDeleteUser={this.onDeleteUser} currentUser={this.state.currentUser} onUpdateUser={this.onUpdateUser} onNavProfile={this.onNavProfile}/>}/>
 					<Route path='/register' element={<Register users={this.state.users} onCreateUser={this.onCreateUser}/>}/>
-					<Route path='/posts' element={<PostList posts={this.state.posts} currentUser={this.state.currentUser}
+					<Route path='/posts' element={<PostList posts={this.state.posts} users={this.state.users} currentUser={this.state.currentUser}  onNavProfile={this.onNavProfile}
 						links={this.state.links}
 						pageSize={this.state.pageSize}
 						onNavigate={this.onNavigate}
@@ -195,7 +223,9 @@ class App extends React.Component {
 						updatePageSize={this.updatePageSize}/>}/>
 					<Route path='/createPost' element={<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}
 						addPost={this.addPost} currentUser={this.state.currentUser}/>}/>
-					<Route path='/profile' element= {<Profile users={this.state.users} currentUser={this.state.currentUser} onUpdateBio={this.onUpdateBio}/>} />
+					<Route path='/profile' element= {<Profile users={this.state.users} currentUser={this.state.currentUser} onUpdateUser={this.onUpdateUser}/>}/>
+					<Route path='/admin' element={<AdminPage users={this.state.users} posts={this.state.posts}/>}/>
+					<Route path='/userProfile' element={<UserProfile key={this.state.profileUser} profileUser={this.state.profileUser} currentUser={this.state.currentUser} onUpdateRating={this.onUpdateRating}/>}/>
 				</Routes>
 			</Router>
 			</div>

@@ -19,27 +19,24 @@ class Profile extends React.Component {
 
     handleSubmit(e) {
 		e.preventDefault();
-        const username = this.props.currentUser.username
-        const password = this.props.currentUser.password
-        const email = this.props.currentUser.email
-        const newUser = ({username, password, email, bio: this.state.bio});
+        const username = this.props.currentUser.username;
+        const password = this.props.currentUser.password;
+        const email = this.props.currentUser.email;
+        const rating = this.props.currentUser.rating;
+        const numRating = this.props.currentUser.numRating;
+        const admin = this.props.currentUser.admin;
+        const newUser = ({username, password, email, bio: this.state.bio, rating, numRating, admin});
         for (let index = 0; index < this.props.users.length; index++) {
             const oldUser = this.props.users[index];
             if(oldUser.username == this.props.currentUser.username){
-                this.props.onUpdateBio(newUser, oldUser);
-                alert('Successfully updated the bio');
+                this.props.onUpdateUser(newUser, oldUser, true);
             }
         }
         this.state.bio = '';  // clear out the dialog's inputs
 	}
 
     render() {
-        /*
-        let inp;
-        if(this.props.currentUser.bio == null) {
-            return <Input />
-        }
-        */
+       console.log(this.props.currentUser);
         return (
             <div className='container'>
                 <Header>{this.props.currentUser.username}</Header>
@@ -53,6 +50,7 @@ class Profile extends React.Component {
                      onChange={event => this.handleChangeBio(event)}/>
                      <Button>Confirm</Button>
                 </Form>
+                
             </div>
         )
     }

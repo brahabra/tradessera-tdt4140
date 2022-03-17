@@ -2,6 +2,7 @@ package app;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -13,21 +14,28 @@ import javax.persistence.OneToMany;
 @Entity
 public class User {
 
+	private boolean admin;
 	private @Id @GeneratedValue Long id;
 	private String username;
 	private String password;
 	private String email;
 	private String bio;
+	private int numRating;
+	private int rating;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Collection<Post> posts = new ArrayList<>();
 
 	public User() {}
 	
-	public User(String username, String password, String email, String bio) {
+	public User(String username, String password, String email, String bio, int rating, int numRating, String... admin) {
+		boolean admin1 = admin.length > 0 ? true : false;
 		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.bio = bio;
+		this.rating = rating;
+		this.numRating = numRating;
+		this.admin = admin1;
 	}
 
 	@Override
@@ -37,6 +45,14 @@ public class User {
 
 	public Long getId() {
 		return id;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
 	public void setId(Long id) {
@@ -87,6 +103,22 @@ public class User {
 		return bio;
 	}
 
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
+	public boolean getAdmin() {
+		return admin;
+	}
+
+	public void setNumRating(int numRating) {
+		this.numRating = numRating;
+	}
+
+	public int getNumRating() {
+		return numRating;
+	}
+
 	@Override
 	public String toString() {
 		return "User{" +
@@ -94,6 +126,8 @@ public class User {
 			", username='" + username + '\'' +
 			", password='" + password + '\'' +
 			", email='" + email + '\'' +
+			", rating='" + rating + '\'' +
+			", admin='" + admin + '\'' +
 			'}';
 	}
 }

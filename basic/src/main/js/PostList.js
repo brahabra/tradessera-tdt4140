@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 
 import {Button, Input, TableStyles, TableHeadStyles} from "./components/styles/Form.styled"
+import { Link } from 'react-router-dom'
 
 const ReactDOM = require('react-dom');
 
@@ -105,7 +106,7 @@ class PostList extends React.Component {
 		}
 
 		const posts = this.state.sorted.map(post =>
-			<Post key={post._links.self.href} post={post} onDelete={this.props.onDelete} currentUser={this.props.currentUser}/>
+			<Post key={post._links.self.href} post={post} users={this.props.users} onDelete={this.props.onDelete} onClose={this.props.onClose} currentUser={this.props.currentUser}  onNavProfile={this.props.onNavProfile}/>
 		);
 		const navLinks = [];
 		if ("first" in this.props.links) {
@@ -131,6 +132,10 @@ class PostList extends React.Component {
 							<th onClick={() => this.handleSort(0)}>User</th>
 							<th onClick={() => this.handleSort(1)}>Title</th>
 							<th onClick={() => this.handleSort(2)}>Text</th>
+							<th>Price</th>
+							<th>Location</th>
+							<th>EventType</th>
+							<th>Rating</th>
 						</tr>
 						<tbody>
 							{posts.filter((val) => {
@@ -153,38 +158,69 @@ class Post extends React.Component {
 		super(props);
 		this.state = {username: ''};
 		this.handleDelete = this.handleDelete.bind(this);
+		//this.handleClose = this.handleClose.bind(this);
 		this.handleContact = this.handleContact.bind(this);
+		this.handleNavigate = this.handleNavigate.bind(this);
 	}
 
 	handleDelete() {
 		this.props.onDelete(this.props.post);
 	}
+	
+	/*
+	handleClose() {
+		this.props.onClose(this.props.post);
+	}
+	*/
 
 	handleContact() {
 		alert('Contact this user on this email: ' + this.props.post.email);
 	}
 
+	handleNavigate() {
+		console.log("Updated profile user");
+		this.props.users.forEach(user => {
+            if (user.username == this.props.post.username) {
+				this.props.onNavProfile(user);
+			}
+        });
+
+	}
+
 	render() {
 		let button;
-		if(this.props.post.username == this.props.currentUser.username){
-			button = <Button onClick={this.handleDelete}>Delete</Button>;
+		if(this.props.post.username == this.props.currentUser.username || this.props.currentUser.admin){
+			button = <Button onClick={this.handleDelete}>Delete</Button>; //<Button onClick={this.handleClose}>Close</Button>
 		}
-		else{
+		else {
 			button = <Button onClick={this.handleContact}>Contact</Button>;
+		}
+		let user = null;
+		for (let index = 0; index < this.props.users.length; index++) {
+            const oldUser = this.props.users[index];
+            if(oldUser.username == this.props.post.username){
+                user = oldUser;
+            }
+        }
+		let rating = 0;
+		if (user != null) {
+			rating = Math.floor(user.rating/user.numRating);
 		}
 		
 		
 		console.log(this.state.search);
 		return (
-				
-				<tr>
-					<td>{this.props.post.username}</td>
-					<td>{this.props.post.title}</td>
-					<td>{this.props.post.text}</td>
+			<tr>
+				<td onClick={() => this.handleNavigate()}><Link to="/userProfile">{this.props.post.username}</Link></td>
+				<td>{this.props.post.title}</td>
+				<td>{this.props.post.text}</td>
+				<td>{this.props.post.price}</td>
+				<td>{this.props.post.location}</td>
+				<td>{this.props.post.eventType}</td>
+				<td>{rating} / 10</td>
 
-					<td>{button}</td>
-				</tr>
-					
+				<td>{button}</td>
+			</tr>
 		)
 	}
 }
