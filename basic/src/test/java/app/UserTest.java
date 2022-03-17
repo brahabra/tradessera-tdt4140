@@ -20,7 +20,7 @@ public class UserTest {
 
     @BeforeEach
 	public void setUp() throws Exception {
-        this.user = new User("userone", "passone", "user1@ntnu.no","hei");
+        this.user = new User("userone", "passone", "user1@ntnu.no","bioone");
     }
 
     @Test
@@ -28,6 +28,7 @@ public class UserTest {
     public void testConstructor() {
         assertEquals("userone", this.user.getUsername(), "The usernames should be equal");
         assertEquals("passone", this.user.getPassword(), "The passwords should be equal");
+        assertEquals("user1@ntnu.no", this.user.getEmail(), "The emails should be equal");
     }
 
     @Test
