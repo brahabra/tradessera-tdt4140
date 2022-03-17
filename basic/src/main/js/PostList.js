@@ -149,6 +149,10 @@ class PostList extends React.Component {
 						</tr>
 						<tbody>
 							{posts.filter((val) => {
+								if (!val.props.post.closed){
+									return val
+								}
+							}).filter((val) => {
 								if (val.props.post.title.toLowerCase().includes(this.state.search.toLowerCase())) {
 									return val
 									}
@@ -168,7 +172,7 @@ class Post extends React.Component {
 		super(props);
 		this.state = {user: {}};
 		this.handleDelete = this.handleDelete.bind(this);
-		//this.handleClose = this.handleClose.bind(this);
+		this.handleClose = this.handleClose.bind(this);
 		this.handleContact = this.handleContact.bind(this);
 		this.handleNavigate = this.handleNavigate.bind(this);
 	}
@@ -177,11 +181,11 @@ class Post extends React.Component {
 		this.props.onDelete(this.props.post);
 	}
 	
-	/*
+	
 	handleClose() {
 		this.props.onClose(this.props.post);
 	}
-	*/
+	
 
 	handleContact() {
 		alert('Contact this user on this email: ' + this.props.post.email);
@@ -200,7 +204,8 @@ class Post extends React.Component {
 	render() {
 		let button;
 		if(this.props.post.username == this.props.currentUser.username || this.props.currentUser.admin){
-			button = <Button onClick={this.handleDelete}>Delete</Button>; //<Button onClick={this.handleClose}>Close</Button>
+			button = <div><Button onClick={this.handleDelete}>Delete</Button>
+						<Button onClick={this.handleClose}>Close</Button></div>;
 		}
 		else {
 			button = <Button onClick={this.handleContact}>Contact</Button>;

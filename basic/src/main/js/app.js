@@ -37,7 +37,7 @@ class App extends React.Component {
 		this.updatePageSize = this.updatePageSize.bind(this);
 		this.onCreate = this.onCreate.bind(this);
 		this.onDelete = this.onDelete.bind(this);
-		//this.onClose = this.onClose.bind(this);
+		this.onClose = this.onClose.bind(this);
 		this.onNavigate = this.onNavigate.bind(this);
 		this.onUpdateUser = this.onUpdateUser.bind(this);
 		this.onUpdateRating = this.onUpdateRating.bind(this);
@@ -159,14 +159,14 @@ class App extends React.Component {
 			this.loadPostsFromServer(this.state.pageSize);
 		});
 	}
-/* fix later
+// fix later
 	onClose(post) {
 		post.closed = true;
 		client({method: 'PUT', path: post._links.self.href, entity: post, headers: {'Content-Type': 'application/json'}}).done(response => {
 			this.loadPostsFromServer();
 		});
 	}
-*/
+
 	onNavigate(navUri) {
 		client({method: 'GET', path: navUri}).done(postCollection => {
 			this.setState({
@@ -230,6 +230,7 @@ class App extends React.Component {
 						pageSize={this.state.pageSize}
 						onNavigate={this.onNavigate}
 						onDelete={this.onDelete}
+						onClose={this.onClose}
 						onSort={this.onSort} sort={this.state.sort}
 						updatePageSize={this.updatePageSize}/>}/>
 					<Route path='/createPost' element={<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}
