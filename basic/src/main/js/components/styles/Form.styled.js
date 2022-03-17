@@ -99,10 +99,13 @@ export const NavMenu = styled.div`
   }
 `;
 
-export const NavLogo = styled.div`
-  margin-right: 11rem;
-  font-weight: 900;
-  font-size: 150%;
+export const NavBrand = styled.div`
+  color: #black;
+  font-family: 'Trocchi', serif; 
+  font-size: 150px; 
+  font-weight: bold; 
+  text-align: left;
+  margin: 0;
 `;
 
 export const NavLogin = styled.div`
@@ -112,4 +115,24 @@ export const NavLogin = styled.div`
   margin-bottom: 30px;
   padding: 0 1rem;
   
+`;
+
+export const TableHeadStyles = styled.tr`
+  background: white;
+  text-align: center;
+  font-style: italic;
+
+
+  th {
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,201,54,1) 100%);
+    font-size: 23px;
+    text-align: center;
+  }
+
+`;
+
+export const TableStyles = styled.tr`
+  background: rgb(255,255,255);
+
 `;

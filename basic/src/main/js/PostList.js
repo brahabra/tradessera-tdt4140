@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
+import {Button, Input, TableStyles, TableHeadStyles} from "./components/styles/Form.styled"
 import { Link } from 'react-router-dom'
-import {Button, Input} from "./components/styles/Form.styled"
 
 const ReactDOM = require('react-dom');
 
@@ -105,7 +105,7 @@ class PostList extends React.Component {
 			this.state.sorted = this.props.posts;
 		}
 
-		const posts = this.props.posts.map(post =>
+		const posts = this.state.sorted.map(post =>
 			<Post key={post._links.self.href} post={post} users={this.props.users} onDelete={this.props.onDelete} onClose={this.props.onClose} currentUser={this.props.currentUser}  onNavProfile={this.props.onNavProfile}/>
 		);
 		const navLinks = [];
@@ -123,32 +123,30 @@ class PostList extends React.Component {
 		}
 
 		return (
-			<div className='container'>
+			<div className='container'>  
 				<Input type="text" value={this.state.search} placeholder="Search for title..."
 				onChange={event => this.handleSearch(event)} />
 				<table className="table table-bordered">
-					<tbody>
+					<TableHeadStyles>
 						<tr>
 							<th onClick={() => this.handleSort(0)}>User</th>
-							<th onClick={() => this.handleSort(1)}>Price</th>
-							<th onClick={() => this.handleSort(2)}>Location</th>
+							<th onClick={() => this.handleSort(1)}>Title</th>
+							<th onClick={() => this.handleSort(2)}>Price</th>
+							<th>Location</th>
 							<th>Type of Event</th>
 							<th>Date of Event</th>
 							<th>Time of Event</th>
 							<th>Comment</th>
 							<th>Rating</th>
 						</tr>
-						<tr>
-							<th> <Button onClick={() => this.handleSort(0)}>Sort User</Button> </th>
-							<th> <Button onClick={() => this.handleSort(1)}>Sort Title</Button> </th>
-							<th> <Button onClick={() => this.handleSort(2)}>Sort Text</Button> </th>
-						</tr>
+						<tbody>
 						{posts.filter((val) => {
 							if (val.props.post.title.toLowerCase().includes(this.state.search.toLowerCase())) {
 								return val
 							}
 						})}
 					</tbody>
+					</TableHeadStyles>
 				</table>
 			</div>
 		)
@@ -208,9 +206,9 @@ class Post extends React.Component {
 		if (user != null) {
 			rating = Math.floor(user.rating/user.numRating);
 		}
-			
+		
+		
 		console.log(this.state.search);
-
 		return (
 			<tr>
 				<td onClick={() => this.handleNavigate()}><Link to="/userProfile">{this.props.post.username}</Link></td>
@@ -248,3 +246,6 @@ export {PostList}
 			setorder("ASC")
 		}
 	}
+
+	/*className="table table-bordered"*/
+	/*'*/
