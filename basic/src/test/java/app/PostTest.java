@@ -1,8 +1,6 @@
 package app;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,8 +11,6 @@ public class PostTest {
     private User user1;
     private User user2;
     private Post post1;
-    private Post post2;
-    private Post post3;
 
     @BeforeEach
 	public void setUp() throws Exception {
