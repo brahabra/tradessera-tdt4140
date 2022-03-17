@@ -42,7 +42,8 @@ class UserProfile extends React.Component {
 
 
         return (
-            <div>
+            <div className="container">
+                <Form onSubmit={this.handleSubmit}>
                 <h1>{this.props.profileUser.username}</h1>
                 Email: {this.props.profileUser.email}
                 <br></br>
@@ -50,7 +51,6 @@ class UserProfile extends React.Component {
                 <br></br>
                 Rating: {Math.floor(this.props.profileUser.rating/this.props.profileUser.numRating)} / 10
                 <br></br>
-                <Form onSubmit={this.handleSubmit}>
                     <Input type="number" value={this.state.rating} placeholder="Enter Rating"
                      onChange={event => this.handleChangeRating(event)}/>
                      <Button>Confirm</Button>

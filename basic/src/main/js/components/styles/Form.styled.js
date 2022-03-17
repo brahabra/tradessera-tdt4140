@@ -100,7 +100,7 @@ export const NavMenu = styled.div`
 `;
 
 export const NavBrand = styled.div`
-  color: #black;
+  color: black;
   font-family: 'Trocchi', serif; 
   font-size: 150px; 
   font-weight: bold; 
