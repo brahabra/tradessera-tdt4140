@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom'
-import {Button} from "./components/styles/Form.styled"
+import {Button, TableHeadStyles} from "./components/styles/Form.styled"
 
 class UserList extends React.Component{
 	render() {
@@ -10,7 +10,8 @@ class UserList extends React.Component{
 		);
 		return (
 			<table>
-				<tbody>
+				
+				<TableHeadStyles>
 					<tr>
 						<th>Username</th>
 						<th>Password</th>
@@ -18,8 +19,10 @@ class UserList extends React.Component{
 						<th>Bio</th>
 						<th>Rating</th>
 					</tr>
+				<tbody>
 					{users}
 				</tbody>
+				</TableHeadStyles>
 			</table>
 		)
 	}

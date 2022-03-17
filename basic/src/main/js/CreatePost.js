@@ -72,7 +72,7 @@ class CreatePost extends React.Component {
 					</label>
 					<br></br>
 					<label>
-						<Input type="text" value={this.state.price} placeholder="Price"
+						<Input type="number" value={this.state.price} placeholder="Price"
 							onChange={event => this.handleChangePrice(event)}/>
 					</label>
 					<br></br>
@@ -81,10 +81,12 @@ class CreatePost extends React.Component {
 							onChange={event => this.handleChangeLocation(event)}/>
 					</label>
 					<br></br>
-					<label>
-						<Input type="text" value={this.state.eventType} placeholder="Type of Event"
-							onChange={event => this.handleChangeEventType(event)}/>
-					</label>
+					Select type <select value={this.state.eventType} onChange={event => this.handleChangeEventType(event)}>
+						<option value="Kino">Kino</option>
+						<option value="Konsert">Konsert</option>
+						<option value="Festival">Festval</option>
+						<option value="Annet">Annet</option>
+					</select>
 					<br></br>
 					<Button onClick={this.handleSubmit}>Create</Button>
 				</Form>
