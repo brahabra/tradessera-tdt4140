@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-import {Button, Input} from "./components/styles/Form.styled"
+import {Button, Input, TableStyles} from "./components/styles/Form.styled"
 
 const ReactDOM = require('react-dom');
 
@@ -127,11 +127,11 @@ class PostList extends React.Component {
 				onChange={event => this.handleSearch(event)} />
 				<table className="table table-bordered">
 					<tbody>
-						<tr>
+						<TableStyles>
 							<th onClick={() => this.handleSort(0)}>User</th>
 							<th onClick={() => this.handleSort(1)}>Title</th>
 							<th onClick={() => this.handleSort(2)}>Text</th>
-						</tr>
+						</TableStyles>
 						<tr>
 							<th> <Button onClick={() => this.handleSort(0)}>Sort User</Button> </th>
 							<th> <Button onClick={() => this.handleSort(1)}>Sort Title</Button> </th>

@@ -10,7 +10,7 @@ import Home from "./Home";
 
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import {Body} from './components/styles/Form.styled'
 
 'use strict';
 
@@ -179,6 +179,7 @@ class App extends React.Component {
 
 	render() {
 		return (
+			<div className='body'>
 			<Router>
 				<NavigationBar onLogout={this.onLogout} currentUser={this.state.currentUser}/>
 				<Routes>
@@ -197,6 +198,7 @@ class App extends React.Component {
 					<Route path='/profile' element= {<Profile users={this.state.users} currentUser={this.state.currentUser} onUpdateBio={this.onUpdateBio}/>} />
 				</Routes>
 			</Router>
+			</div>
 		)
 	}
 }

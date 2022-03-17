@@ -113,3 +113,10 @@ export const NavLogin = styled.div`
   padding: 0 1rem;
   
 `;
+
+export const TableStyles = styled.tr`
+
+  background: rgb(252,255,215);
+  background: radial-gradient(circle, rgba(252,255,215,1) 0%, rgba(255,204,75,1) 100%);
+
+`;
