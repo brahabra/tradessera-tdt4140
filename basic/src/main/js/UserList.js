@@ -9,19 +9,18 @@ class UserList extends React.Component{
 			<User key={user._links.self.href} user={user} onDeleteUser={this.props.onDeleteUser} currentUser={this.props.currentUser} onUpdateUser={this.props.onUpdateUser} onNavProfile={this.props.onNavProfile}/>
 		);
 		return (
-			<div className='container'>
-				<table className="table table-bordered">
-					<tbody>
-						<tr>
-							<th>Username</th>
-							<th>Password</th>
-							<th>Email</th>
-							<th>Bio</th>
-						</tr>
-						{users}
-					</tbody>
-				</table>
-			</div>
+			<table>
+				<tbody>
+					<tr>
+						<th>Username</th>
+						<th>Password</th>
+						<th>Email</th>
+						<th>Bio</th>
+						<th>Rating</th>
+					</tr>
+					{users}
+				</tbody>
+			</table>
 		)
 	}
 }
@@ -54,7 +53,7 @@ class User extends React.Component{
 		let delButton;
 		if(this.props.currentUser != null){
 			if(this.props.currentUser.admin){
-				if(this.props.user.admin && this.props.currentUser.username != this.props.user.username){
+				if(this.props.user.admin){
 					delButton = <td><Button onClick={this.handleDelete}>Delete</Button></td>;
 				} else{
 					delButton = <td><Button onClick={this.handleDelete}>Delete</Button>
@@ -70,6 +69,7 @@ class User extends React.Component{
 				<td>{this.props.user.password}</td>
 				<td>{this.props.user.email}</td>
 				<td>{this.props.user.bio}</td>
+				<td>{Math.floor(this.props.user.rating/this.props.user.numRating)} / 10</td>
 				{delButton}
 			</tr>
 		)

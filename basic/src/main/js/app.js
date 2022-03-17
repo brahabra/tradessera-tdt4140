@@ -34,8 +34,10 @@ class App extends React.Component {
 		this.updatePageSize = this.updatePageSize.bind(this);
 		this.onCreate = this.onCreate.bind(this);
 		this.onDelete = this.onDelete.bind(this);
+		//this.onClose = this.onClose.bind(this);
 		this.onNavigate = this.onNavigate.bind(this);
 		this.onUpdateUser = this.onUpdateUser.bind(this);
+		this.onUpdateRating = this.onUpdateRating.bind(this);
 		this.onNavProfile = this.onNavProfile.bind(this);
 	}
 
@@ -153,7 +155,14 @@ class App extends React.Component {
 			this.loadPostsFromServer(this.state.pageSize);
 		});
 	}
-
+/* fix later
+	onClose(post) {
+		post.closed = true;
+		client({method: 'PUT', path: post._links.self.href, entity: post, headers: {'Content-Type': 'application/json'}}).done(response => {
+			this.loadPostsFromServer();
+		});
+	}
+*/
 	onNavigate(navUri) {
 		client({method: 'GET', path: navUri}).done(postCollection => {
 			this.setState({
@@ -181,6 +190,15 @@ class App extends React.Component {
 		}
 	}
 
+	onUpdateRating(newUser, oldUser){
+		client({method: 'PUT', path: oldUser._links.self.href, entity: newUser, headers: {'Content-Type': 'application/json'}}).done(response => {
+			this.loadUsersFromServer();
+		});
+		this.state.profileUser = newUser;
+		localStorage.setItem("profileUser", JSON.stringify(this.state.profileUser));
+		window.location.reload(false);
+	}
+
 	onNavProfile(user){
 		this.state.profileUser = user;
 		localStorage.setItem("profileUser", JSON.stringify(this.state.profileUser));
@@ -206,7 +224,7 @@ class App extends React.Component {
 						addPost={this.addPost} currentUser={this.state.currentUser}/>}/>
 					<Route path='/profile' element= {<Profile users={this.state.users} currentUser={this.state.currentUser} onUpdateUser={this.onUpdateUser}/>}/>
 					<Route path='/admin' element={<AdminPage users={this.state.users} posts={this.state.posts}/>}/>
-					<Route path='/userProfile' element={<UserProfile key={this.state.profileUser} profileUser={this.state.profileUser} currentUser={this.state.currentUser}/>}/>
+					<Route path='/userProfile' element={<UserProfile key={this.state.profileUser} profileUser={this.state.profileUser} currentUser={this.state.currentUser} onUpdateRating={this.onUpdateRating}/>}/>
 				</Routes>
 			</Router>
 		)

@@ -36,7 +36,7 @@ class Register extends React.Component{
 			}
 		}
 		if(available){
-			const newUser = {username: this.state.uname, password: this.state.pass, email: this.state.mail};
+			const newUser = {username: this.state.uname, password: this.state.pass, email: this.state.mail, bio: "", rating: 0, numRating: 1};
 			this.props.onCreateUser(newUser);
 			alert('Successfully regstered: ' + this.state.uname + "\nWith mail: " + this.state.mail);
 		}
