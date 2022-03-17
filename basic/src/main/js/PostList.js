@@ -49,7 +49,7 @@ class PostList extends React.Component {
 
 	render() {
 		const posts = this.props.posts.map(post =>
-			<Post key={post._links.self.href} post={post} users={this.props.users} onDelete={this.props.onDelete} currentUser={this.props.currentUser}  onNavProfile={this.props.onNavProfile}/>
+			<Post key={post._links.self.href} post={post} users={this.props.users} onDelete={this.props.onDelete} onClose={this.props.onClose} currentUser={this.props.currentUser}  onNavProfile={this.props.onNavProfile}/>
 		);
 
 		const navLinks = [];
@@ -79,7 +79,7 @@ class PostList extends React.Component {
 							<th>EventType</th>
 							<th>Rating</th>
 						</tr>
-						{posts}
+						{posts.filter(post => !post.closed)}
 					</tbody>
 				</table>
 			</div>
@@ -93,6 +93,7 @@ class Post extends React.Component {
 		super(props);
 		this.state = {username: ''};
 		this.handleDelete = this.handleDelete.bind(this);
+		//this.handleClose = this.handleClose.bind(this);
 		this.handleContact = this.handleContact.bind(this);
 		this.handleNavigate = this.handleNavigate.bind(this);
 	}
@@ -100,10 +101,15 @@ class Post extends React.Component {
 	handleDelete() {
 		this.props.onDelete(this.props.post);
 	}
+	
+	/*
+	handleClose() {
+		this.props.onClose(this.props.post);
+	}
+	*/
 
 	handleContact() {
 		alert('Contact this user on this email: ' + this.props.post.email);
-		console.log("Contact not impllemented yet"); //implement this later
 	}
 
 	handleNavigate() {
@@ -118,11 +124,22 @@ class Post extends React.Component {
 
 	render() {
 		let button;
-		if(this.props.post.username == this.props.currentUser.username){
-			button = <Button onClick={this.handleDelete}>Delete</Button>;
+		if(this.props.post.username == this.props.currentUser.username || this.props.currentUser.admin){
+			button = <Button onClick={this.handleDelete}>Delete</Button>; //<Button onClick={this.handleClose}>Close</Button>
 		}
 		else {
 			button = <Button onClick={this.handleContact}>Contact</Button>;
+		}
+		let user = null;
+		for (let index = 0; index < this.props.users.length; index++) {
+            const oldUser = this.props.users[index];
+            if(oldUser.username == this.props.post.username){
+                user = oldUser;
+            }
+        }
+		let rating = 0;
+		if (user != null) {
+			rating = Math.floor(user.rating/user.numRating);
 		}
 		
 		return (
@@ -133,7 +150,7 @@ class Post extends React.Component {
 				<td>{this.props.post.price}</td>
 				<td>{this.props.post.location}</td>
 				<td>{this.props.post.eventType}</td>
-				<td>{this.props.post.rating}</td>
+				<td>{rating} / 10</td>
 
 				<td>{button}</td>
 			</tr>

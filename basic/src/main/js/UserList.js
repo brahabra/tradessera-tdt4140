@@ -16,6 +16,7 @@ class UserList extends React.Component{
 						<th>Password</th>
 						<th>Email</th>
 						<th>Bio</th>
+						<th>Rating</th>
 					</tr>
 					{users}
 				</tbody>
@@ -52,7 +53,7 @@ class User extends React.Component{
 		let delButton;
 		if(this.props.currentUser != null){
 			if(this.props.currentUser.admin){
-				if(this.props.user.admin && this.props.currentUser.username != this.props.user.username){
+				if(this.props.user.admin){
 					delButton = <td><Button onClick={this.handleDelete}>Delete</Button></td>;
 				} else{
 					delButton = <td><Button onClick={this.handleDelete}>Delete</Button>
@@ -68,6 +69,7 @@ class User extends React.Component{
 				<td>{this.props.user.password}</td>
 				<td>{this.props.user.email}</td>
 				<td>{this.props.user.bio}</td>
+				<td>{Math.floor(this.props.user.rating/this.props.user.numRating)} / 10</td>
 				{delButton}
 			</tr>
 		)
