@@ -20,7 +20,7 @@ public class UserTest {
 
     @BeforeEach
 	public void setUp() throws Exception {
-        this.user = new User("userone", "passone", "user1@ntnu.no","hei");
+        this.user = new User("userone", "passone", "user1@ntnu.no","bioone");
     }
 
     @Test
@@ -28,6 +28,7 @@ public class UserTest {
     public void testConstructor() {
         assertEquals("userone", this.user.getUsername(), "The usernames should be equal");
         assertEquals("passone", this.user.getPassword(), "The passwords should be equal");
+        assertEquals("user1@ntnu.no", this.user.getEmail(), "The emails should be equal");
     }
 
     @Test
@@ -43,10 +44,10 @@ public class UserTest {
     @DisplayName("Test add posts")
     public void testAddPosts() {
         assertFalse(this.user.getPosts().contains(post1), "The post should not be posted yet");
-        this.post1 = new Post("titleone", "textone", this.user);
+        this.post1 = new Post("titleone", "textone", this.user, 200, "Trondhiem", "Konsert");
         this.user.addPost(this.post1);
         assertTrue(this.user.getPosts().contains(post1), "The post should be posted now");
-        this.post2 = new Post("titletwo", "texttwo", this.user);
+        this.post2 = new Post("titletwo", "texttwo", this.user, 200, "Trondhiem", "Konsert");
         this.user.addPost(this.post2);
         assertEquals(Arrays.asList(this.post1, this.post2), this.user.getPosts(), "The lists of posts should be equal");
     }
@@ -54,9 +55,9 @@ public class UserTest {
     @Test
     @DisplayName("Test remove posts")
     public void testRemovePosts() {
-        this.post1 = new Post("titleone", "textone", this.user);
-        this.post2 = new Post("titletwo", "texttwo", this.user);
-        this.post3 = new Post("titlethree", "textthree", this.user);
+        this.post1 = new Post("titleone", "textone", this.user, 200, "Trondhiem", "Konsert");
+        this.post2 = new Post("titletwo", "texttwo", this.user, 200, "Trondhiem", "Konsert");
+        this.post3 = new Post("titlethree", "textthree", this.user, 200, "Trondhiem", "Konsert");
         this.user.addPost(this.post1);
         this.user.addPost(this.post2);
         this.user.addPost(this.post3);

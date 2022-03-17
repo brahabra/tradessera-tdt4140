@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller // <1>
 public class HomeController {
 
-	@RequestMapping(value = {"/", "/login", "/users", "/register", "/posts", "/createPost", "/profile"}) // <2>
+	@RequestMapping(value = {"/", "/login", "/users", "/register", "/posts", "/createPost", "/profile", "/admin", "/userProfile"}) // <2>
 	public String index() {
 		return "index"; // <3>
 	}

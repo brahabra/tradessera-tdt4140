@@ -21,20 +21,63 @@ public class Post {
 	private String email;
     private String title;
     private String text;
+	private int price;
+	private String location;
+	private String eventType;
+	private int rating;
+	private boolean closed;
 
 	public Post() {}
 
-    public Post(String title, String text, User user) {
+    public Post(String title, String text, User user, int price, String location, String eventType, String... closed) {
+		boolean closed1 = closed.length > 0 ? true : false;
 		this.user = user;
 		this.username = user.getUsername();
 		this.email = user.getEmail();
 		this.title = title;
 		this.text = text;
+		this.price = price;
+		this.location = location;
+		this.eventType = eventType;
+		this.rating = user.getRating();
+		this.closed = closed1;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, user, title, text);
+		return Objects.hash(id, user, title, text, price, location, eventType, rating);
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	public String getEventType() {
+		return eventType;
+	}
+
+	public void setEventType(String eventType) {
+		this.eventType = eventType;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public User getUser() {
@@ -84,6 +127,8 @@ public class Post {
 			", Title='" + title + '\'' +
 			", text='" + text + '\'' +
 			", username='" + username + '\'' +
+			", price='" + String.valueOf(price) + '\'' +
+			", rating='" + String.valueOf(rating) + '\'' +
 			'}';
 	}
 }

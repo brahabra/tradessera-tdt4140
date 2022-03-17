@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 
 import {Button, Input} from "./components/styles/Form.styled"
+import { Link } from 'react-router-dom'
 
 const ReactDOM = require('react-dom');
 
@@ -131,11 +132,10 @@ class PostList extends React.Component {
 							<th onClick={() => this.handleSort(0)}>User</th>
 							<th onClick={() => this.handleSort(1)}>Title</th>
 							<th onClick={() => this.handleSort(2)}>Text</th>
-						</tr>
-						<tr>
-							<th> <Button onClick={() => this.handleSort(0)}>Sort User</Button> </th>
-							<th> <Button onClick={() => this.handleSort(1)}>Sort Title</Button> </th>
-							<th> <Button onClick={() => this.handleSort(2)}>Sort Text</Button> </th>
+							<th>Price</th>
+							<th>Location</th>
+							<th>EventType</th>
+							<th>Rating</th>
 						</tr>
 						{posts.filter((val) => {
 							if (val.props.post.title.toLowerCase().includes(this.state.search.toLowerCase())) {
@@ -156,6 +156,7 @@ class Post extends React.Component {
 		this.state = {username: ''};
 		this.handleDelete = this.handleDelete.bind(this);
 		this.handleContact = this.handleContact.bind(this);
+		this.handleNavigate = this.handleNavigate.bind(this);
 	}
 
 	handleDelete() {
@@ -166,12 +167,22 @@ class Post extends React.Component {
 		alert('Contact this user on this email: ' + this.props.post.email);
 	}
 
+	handleNavigate() {
+		console.log("Updated profile user");
+		this.props.users.forEach(user => {
+            if (user.username == this.props.post.username) {
+				this.props.onNavProfile(user);
+			}
+        });
+
+	}
+
 	render() {
 		let button;
 		if(this.props.post.username == this.props.currentUser.username){
 			button = <Button onClick={this.handleDelete}>Delete</Button>;
 		}
-		else{
+		else {
 			button = <Button onClick={this.handleContact}>Contact</Button>;
 		}
 		
@@ -179,9 +190,13 @@ class Post extends React.Component {
 		console.log(this.state.search);
 		return (
 			<tr>
-				<td>{this.props.post.username}</td>
+				<td onClick={() => this.handleNavigate()}><Link to="/userProfile">{this.props.post.username}</Link></td>
 				<td>{this.props.post.title}</td>
 				<td>{this.props.post.text}</td>
+				<td>{this.props.post.price}</td>
+				<td>{this.props.post.location}</td>
+				<td>{this.props.post.eventType}</td>
+				<td>{this.props.post.rating}</td>
 
 				<td>{button}</td>
 			</tr>

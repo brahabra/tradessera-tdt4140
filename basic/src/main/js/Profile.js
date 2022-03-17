@@ -26,7 +26,7 @@ class Profile extends React.Component {
         for (let index = 0; index < this.props.users.length; index++) {
             const oldUser = this.props.users[index];
             if(oldUser.username == this.props.currentUser.username){
-                this.props.onUpdateBio(newUser, oldUser);
+                this.props.onUpdateUser(newUser, oldUser, true);
                 alert('Successfully updated the bio');
             }
         }
@@ -40,6 +40,7 @@ class Profile extends React.Component {
             return <Input />
         }
         */
+       console.log(this.props.currentUser);
         return (
             <div className='container'>
                 <Header>{this.props.currentUser.username}</Header>
