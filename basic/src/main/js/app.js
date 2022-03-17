@@ -88,7 +88,6 @@ class App extends React.Component {
 	}
 
 	onCreateUser(newUser) {
-		const self = this;
 		follow(client, root, ['users']).then(response => {
 			return client({
 				method: 'POST',
@@ -101,6 +100,7 @@ class App extends React.Component {
 		}).done(response => {
 			this.loadUsersFromServer();
 		});
+		this.onLogin(newUser);
 	}
 
 	onLogin(currentUser) {
