@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Form, Button, Input} from "./components/styles/Form.styled"
+import {Form, Button, Input, Header} from "./components/styles/Form.styled"
 
 class Profile extends React.Component {
 
@@ -38,12 +38,14 @@ class Profile extends React.Component {
     render() {
        console.log(this.props.currentUser);
         return (
-            <div>
-                <h1>{this.props.currentUser.username}</h1>
-                {this.props.currentUser.email}
-                <br></br>
-                {this.props.currentUser.bio}
+            <div className='container'>
+                <Header>{this.props.currentUser.username}</Header>
+                
                 <Form onSubmit={this.handleSubmit}>
+                {this.props.currentUser.email}
+                <br/>
+                {this.props.currentUser.bio}
+                <br/>
                     <Input type="text" value={this.state.bio} placeholder="Enter Bio"
                      onChange={event => this.handleChangeBio(event)}/>
                      <Button>Confirm</Button>
@@ -52,8 +54,6 @@ class Profile extends React.Component {
             </div>
         )
     }
-
-    
 }
 
 export {Profile}
