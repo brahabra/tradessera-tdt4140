@@ -56,13 +56,13 @@ class Register extends React.Component{
 					</label>
 					<br></br>
 					<label>
-						<Input type="text" value={this.state.pass} placeholder="Enter Password"
-						 onChange={event => this.handleChangePass(event)} />
+						<Input type="email" value={this.state.mail} placeholder="Enter Email"
+						 onChange={event => this.handleChangeMail(event)} />
 					</label>
 					<br></br>
 					<label>
-						<Input type="text" value={this.state.mail} placeholder="Enter Email"
-						 onChange={event => this.handleChangeMail(event)} />
+						<Input type="password" value={this.state.pass} placeholder="Enter Password"
+						 onChange={event => this.handleChangePass(event)} />
 					</label>
 					<br></br>
 					<Button>Register</Button>

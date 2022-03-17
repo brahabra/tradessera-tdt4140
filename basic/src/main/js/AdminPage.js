@@ -24,7 +24,7 @@ class AdminPage extends React.Component {
             }
         });
         return (
-            <div>
+            <div className="container">
                 <h1>This is the admin page</h1>
                 <h2>Number of Users: {this.state.numUsers}</h2> 
                 <br></br>

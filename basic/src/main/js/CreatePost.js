@@ -84,7 +84,7 @@ class CreatePost extends React.Component {
 					Select type <select value={this.state.eventType} onChange={event => this.handleChangeEventType(event)}>
 						<option value="Kino">Kino</option>
 						<option value="Konsert">Konsert</option>
-						<option value="Festival">Festval</option>
+						<option value="Festival">Festival</option>
 						<option value="Annet">Annet</option>
 					</select>
 					<br></br>
