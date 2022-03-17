@@ -44,10 +44,10 @@ public class UserTest {
     @DisplayName("Test add posts")
     public void testAddPosts() {
         assertFalse(this.user.getPosts().contains(post1), "The post should not be posted yet");
-        this.post1 = new Post("titleone", "textone", this.user, 200, "Trondhiem", "Konsert");
+        this.post1 = new Post("titleone", this.user, 200, "Trondhiem", "Konsert", "20.04.22", "18:30", "commentone");
         this.user.addPost(this.post1);
         assertTrue(this.user.getPosts().contains(post1), "The post should be posted now");
-        this.post2 = new Post("titletwo", "texttwo", this.user, 200, "Trondhiem", "Konsert");
+        this.post2 = new Post("titleone", this.user, 200, "Trondhiem", "Konsert", "20.04.22", "18:30", "commenttwo");
         this.user.addPost(this.post2);
         assertEquals(Arrays.asList(this.post1, this.post2), this.user.getPosts(), "The lists of posts should be equal");
     }
@@ -55,9 +55,9 @@ public class UserTest {
     @Test
     @DisplayName("Test remove posts")
     public void testRemovePosts() {
-        this.post1 = new Post("titleone", "textone", this.user, 200, "Trondhiem", "Konsert");
-        this.post2 = new Post("titletwo", "texttwo", this.user, 200, "Trondhiem", "Konsert");
-        this.post3 = new Post("titlethree", "textthree", this.user, 200, "Trondhiem", "Konsert");
+        this.post1 = new Post("titleone", this.user, 200, "Trondhiem", "Konsert", "20.04.22", "18:30", "commentone");
+        this.post2 = new Post("titleone", this.user, 200, "Trondhiem", "Konsert", "20.04.22", "18:30", "commenttwo");
+        this.post3 = new Post("titleone", this.user, 200, "Trondhiem", "Konsert", "20.04.22", "18:30", "commentthree");
         this.user.addPost(this.post1);
         this.user.addPost(this.post2);
         this.user.addPost(this.post3);

@@ -131,21 +131,21 @@ class PostList extends React.Component {
 						<tr>
 							<th onClick={() => this.handleSort(0)}>User</th>
 							<th onClick={() => this.handleSort(1)}>Title</th>
-							<th onClick={() => this.handleSort(2)}>Text</th>
-							<th>Price</th>
+							<th onClick={() => this.handleSort(2)}>Price</th>
 							<th>Location</th>
-							<th>EventType</th>
+							<th>Type of Event</th>
+							<th>Date of Event</th>
+							<th>Time of Event</th>
+							<th>Comment</th>
 							<th>Rating</th>
-							<th>     </th>
 						</tr>
 						<tbody>
-							{posts.filter((val) => {
-								if (val.props.post.title.toLowerCase().includes(this.state.search.toLowerCase())) {
-									return val
-									}
-							})}
-							
-						</tbody>
+						{posts.filter((val) => {
+							if (val.props.post.title.toLowerCase().includes(this.state.search.toLowerCase())) {
+								return val
+							}
+						})}
+					</tbody>
 					</TableHeadStyles>
 				</table>
 			</div>
@@ -185,7 +185,6 @@ class Post extends React.Component {
 				this.props.onNavProfile(user);
 			}
         });
-
 	}
 
 	render() {
@@ -214,10 +213,12 @@ class Post extends React.Component {
 			<tr>
 				<td onClick={() => this.handleNavigate()}><Link to="/userProfile">{this.props.post.username}</Link></td>
 				<td>{this.props.post.title}</td>
-				<td>{this.props.post.text}</td>
 				<td>{this.props.post.price}</td>
 				<td>{this.props.post.location}</td>
 				<td>{this.props.post.eventType}</td>
+				<td>{this.props.post.dateOfEvent}</td>
+				<td>{this.props.post.timeOfEvent}</td>
+				<td>{this.props.post.comment}</td>
 				<td>{rating} / 10</td>
 				<td>{button}</td>
 			</tr>
