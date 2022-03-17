@@ -20,7 +20,7 @@ public class UserTest {
 
     @BeforeEach
 	public void setUp() throws Exception {
-        this.user = new User("userone", "passone", "user1@ntnu.no","bioone");
+        this.user = new User("userone", "passone", "user1@ntnu.no","hei", 0 , 0);
     }
 
     @Test
