@@ -136,6 +136,7 @@ class PostList extends React.Component {
 							<th>Location</th>
 							<th>EventType</th>
 							<th>Rating</th>
+							<th>     </th>
 						</tr>
 						<tbody>
 							{posts.filter((val) => {
@@ -218,7 +219,6 @@ class Post extends React.Component {
 				<td>{this.props.post.location}</td>
 				<td>{this.props.post.eventType}</td>
 				<td>{rating} / 10</td>
-
 				<td>{button}</td>
 			</tr>
 		)
