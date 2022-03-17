@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom'
 import {Navbar, Form, ButtonGroup} from 'react-bootstrap';
 //import Logo from '../../../Logo.png';
-import {Nav, NavMenu, NavLink, NavLogo, NavLogin, Button} from './components/styles/Form.styled'
+import {Nav, NavMenu, NavLink, NavBrand, NavLogin, Button} from './components/styles/Form.styled'
 
 export default class NavigatonBar extends React.Component {
     render() {
@@ -26,16 +26,11 @@ export default class NavigatonBar extends React.Component {
             <>
             <Nav>
                 <NavMenu>
-                <NavLogo>
-                <Navbar.Brand href="..">
-                    <img 
-                    alt=""
-                    src="./Logo.png"
-                    width="30"
-                    height="30"
-                    /> {' '} Tradessera
-                </Navbar.Brand>
-                </NavLogo>
+                <NavBrand>
+                    <Navbar.Brand href="..">
+                        Tradessera
+                    </Navbar.Brand>
+                </NavBrand>
                 
                 <NavLink to='/posts' >Posts</NavLink>
                 <NavLink to='/createPost' >CreatePost</NavLink>

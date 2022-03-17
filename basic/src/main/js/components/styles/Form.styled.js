@@ -99,10 +99,13 @@ export const NavMenu = styled.div`
   }
 `;
 
-export const NavLogo = styled.div`
-  margin-right: 11rem;
-  font-weight: 900;
-  font-size: 150%;
+export const NavBrand = styled.div`
+  color: #black;
+  font-family: 'Trocchi', serif; 
+  font-size: 150px; 
+  font-weight: bold; 
+  text-align: left;
+  margin: 0;
 `;
 
 export const NavLogin = styled.div`
