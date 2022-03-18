@@ -146,6 +146,7 @@ class PostList extends React.Component {
 							<th onClick={() => this.handleSort(4)}>Location</th>
 							<th onClick={() => this.handleSort(5)}>EventType</th>
 							<th onClick={() => this.handleSort(6)}>Rating</th>
+							<th>      </th>
 						</tr>
 						<tbody>
 							{posts.filter((val) => {
