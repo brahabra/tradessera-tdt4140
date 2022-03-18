@@ -59,13 +59,13 @@ export const Input = styled.input`
 `;
 
 export const NavLink = styled(Link)`
-  color: #808080;
+  margin-left: 30px;
+  color: #f7f5f5;
   display: flex;
   align-items: center;
   text-decoration: none;
   padding: 0 1rem;
   height: 100%;
-  cursor: pointer;
   font-weight: 900;
   font-size: 150%;
   &.active {
@@ -74,38 +74,37 @@ export const NavLink = styled(Link)`
 `;
 
 export const Nav = styled.nav`
-  background: #ffb703;
+  background: rgb(131,58,180);
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
   height: 85px;
   display: flex;
   justify-content: space-between;
   padding: 0.2rem calc((100vw - 1000px) / 2);
   z-index: 12;
   margin-bottom: 0.9rem;
-  /* Third Nav */
-  /* justify-content: flex-start; */
 `;
 
 export const NavMenu = styled.div`
+  margin-left: 130px;
   display: flex;
   align-items: center;
   margin-right: -24px;
-  /* Second Nav */
-  /* margin-right: 24px; */
-  /* Third Nav */
-  /* width: 100vw;
-  white-space: nowrap; */
   @media screen and (max-width: 768px) {
     display: none;
   }
 `;
 
 export const NavBrand = styled.div`
+  margin-left: -250px;
+  /*
+  margin-bottom: 185px;
   color: black;
   font-family: 'Trocchi', serif; 
   font-size: 150px; 
   font-weight: bold; 
   text-align: left;
   margin: 0;
+  */
 `;
 
 export const NavLogin = styled.div`
