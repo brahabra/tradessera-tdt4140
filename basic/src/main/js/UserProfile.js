@@ -10,6 +10,7 @@ class UserProfile extends React.Component {
         this.state = {user: this.props.profileUser, rating: ""};
         this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChangeRating = this.handleChangeRating.bind(this);
+        this.handleReport = this.handleReport.bind(this);
     }
 
     handleChangeRating(event) {
@@ -38,6 +39,12 @@ class UserProfile extends React.Component {
         this.state.rating = '';  // clear out the dialog's inputs
 	}
 
+    handleReport() {
+        const report = ({reporter: this.props.currentUser.username, reported: this.props.profileUser.username});
+        this.props.onReport(report);
+        alert("User has been reported");
+    }
+
     render() {
 
 
@@ -55,6 +62,7 @@ class UserProfile extends React.Component {
                      onChange={event => this.handleChangeRating(event)}/>
                      <Button>Confirm</Button>
                 </Form>
+                <Button onClick={this.handleReport}>Report User</Button>
             </div>
         )
     }

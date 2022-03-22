@@ -26,7 +26,7 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {users: [], posts: [], attributes: [], pageSize: 2, links: {}, 
+		this.state = {users: [], posts: [], reports: [], attributes: [], pageSize: 2, links: {}, 
 		currentUser: JSON.parse(localStorage.getItem("currentUser")) || {},
 		profileUser: JSON.parse(localStorage.getItem("profileUser")) || {}, 
 		sort: JSON.parse(localStorage.getItem("sort")) || 0};
@@ -43,10 +43,13 @@ class App extends React.Component {
 		this.onUpdateRating = this.onUpdateRating.bind(this);
 		this.onNavProfile = this.onNavProfile.bind(this);
 		this.onSort = this.onSort.bind(this);
+		this.onReport = this.onReport.bind(this);
+		this.onDeleteReport = this.onDeleteReport.bind(this);
 	}
 
 	componentDidMount() {
 		this.loadUsersFromServer();
+		this.loadReportsFromServer();
 		this.loadPostsFromServer();
 	}
 
@@ -85,6 +88,24 @@ class App extends React.Component {
 				attributes: Object.keys(this.schema.properties),
 				links: postCollection.entity._links});
 		});
+	}
+	loadReportsFromServer() {
+		follow(client, root, [
+			{rel: 'reports'}]
+		).then(reportCollection => {
+			return client({
+				method: 'GET',
+				path: reportCollection.entity._links.profile.href,
+				headers: {'Accept': 'application/schema+json'}
+			}).then(schema => {
+				return reportCollection;
+			});
+		}).done(reportCollection => {
+			this.setState({
+				reports: reportCollection.entity._embedded.reports,
+				links: reportCollection.entity._links});
+		});
+		
 	}
 
 	onCreateUser(newUser) {
@@ -215,6 +236,29 @@ class App extends React.Component {
 		window.location.reload(false);
 	}
 
+	onReport(report) {
+		follow(client, root, ['reports']).then(response => {
+			return client({
+				method: 'POST',
+				path: response.entity._links.self.href,
+				entity: report,
+				headers: {'Content-Type': 'application/json'}
+			})
+		}).then(response => {
+			return follow(client, root, [{rel: 'reports'}]);
+		}).done(response => {
+			this.loadReportsFromServer();
+		});
+		
+	}
+
+	onDeleteReport(report) {
+		client({method: 'DELETE', path: report._links.self.href}).done(response => {
+			this.loadReportsFromServer();
+		});
+
+	}
+
 	render() {
 		return (
 			<div className='body'>
@@ -235,9 +279,9 @@ class App extends React.Component {
 						updatePageSize={this.updatePageSize}/>}/>
 					<Route path='/createPost' element={<CreatePost attributes={this.state.attributes} onCreate={this.onCreate}
 						addPost={this.addPost} currentUser={this.state.currentUser}/>}/>
-					<Route path='/profile' element= {<Profile users={this.state.users} currentUser={this.state.currentUser} onUpdateUser={this.onUpdateUser}/>}/>
-					<Route path='/admin' element={<AdminPage users={this.state.users} posts={this.state.posts}/>}/>
-					<Route path='/userProfile' element={<UserProfile key={this.state.profileUser} profileUser={this.state.profileUser} currentUser={this.state.currentUser} onUpdateRating={this.onUpdateRating}/>}/>
+					<Route path='/profile' element= {<Profile users={this.state.users} currentUser={this.state.currentUser} onDeleteUser={this.onDeleteUser} onUpdateUser={this.onUpdateUser}/>}/>
+					<Route path='/admin' element={<AdminPage users={this.state.users} posts={this.state.posts} reports={this.state.reports} onDeleteReport={this.onDeleteReport}/>}/>
+					<Route path='/userProfile' element={<UserProfile key={this.state.profileUser} profileUser={this.state.profileUser} currentUser={this.state.currentUser} onUpdateRating={this.onUpdateRating} onReport={this.onReport}/>}/>
 				</Routes>
 			</Router>
 			</div>

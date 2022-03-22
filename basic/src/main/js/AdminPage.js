@@ -1,5 +1,6 @@
 import React from "react";
 
+import {ReportList} from './ReportList';
 
 class AdminPage extends React.Component {
 
@@ -11,6 +12,7 @@ class AdminPage extends React.Component {
 
 
     render() {
+        console.log(this.props.reports);
         this.state.numUsers = 0;
         this.state.numPosts = 0;
         this.state.numClosed = 0;
@@ -33,8 +35,10 @@ class AdminPage extends React.Component {
                 <h2>Number of Closed Posts: {this.state.numClosed}</h2> 
                 <br></br>
                 
+                <ReportList reports={this.props.reports} onDeleteReport={this.props.onDeleteReport}/>
             </div>
-        )
+            
+        ) //
     }
 
     
