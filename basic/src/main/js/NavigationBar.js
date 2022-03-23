@@ -45,12 +45,4 @@ export default class NavigatonBar extends React.Component {
             </>
         )
     }
-    /*
-    <Link>
-                <Nav.Link href="..">Home</Nav.Link>
-                </Link>
-    <Link>
-                <Nav.Link href="users">Users</Nav.Link>
-                </Link>
-    */   
 }

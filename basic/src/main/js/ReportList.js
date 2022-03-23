@@ -16,7 +16,7 @@ class ReportList extends React.Component{
 					<tr>
 						<th>Reporter</th>
 						<th>Reported</th>
-						<th>Reason</th>
+						<th></th>
 					</tr>
 				<tbody>
 					{reports}
@@ -43,7 +43,7 @@ class Report extends React.Component{
 			<tr>
 				<td>{this.props.report.reporter}</td>
 				<td>{this.props.report.reported}</td>
-				<Button onClick={this.handleDelete}>Delete</Button>
+				<Button onClick={this.handleDelete}>Remove report</Button>
 			</tr>
 		)
 	}

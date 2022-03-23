@@ -136,6 +136,16 @@ class PostList extends React.Component {
 			<div className='container'>  
 				<Input type="text" value={this.state.search} placeholder="Search for title..."
 				onChange={event => this.handleSearch(event)} />
+				<br></br>
+				<Button onClick={() => this.handleSort(0)}>Sort User</Button>
+				<Button onClick={() => this.handleSort(1)}>Sort Title</Button>
+				<Button onClick={() => this.handleSort(2)}>Sort Text</Button>
+				<Button onClick={() => this.handleSort(3)}>Sort Price</Button>
+				<Button onClick={() => this.handleSort(4)}>Sort Location</Button>
+				<Button onClick={() => this.handleSort(5)}>Sort EventType</Button>
+				<Button onClick={() => this.handleSort(6)}>Sort Rating</Button>
+
+
 				<table className="table table-bordered">
 					<TableHeadStyles>
 						<tr>

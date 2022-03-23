@@ -18,6 +18,7 @@ class UserList extends React.Component{
 						<th>Email</th>
 						<th>Bio</th>
 						<th>Rating</th>
+						<th>Actions</th>
 					</tr>
 				<tbody>
 					{users}
