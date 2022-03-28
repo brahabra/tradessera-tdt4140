@@ -20,6 +20,7 @@ class Profile extends React.Component {
 
     handleDelete() {
 		this.props.onDeleteUser(this.props.currentUser);
+        this.props.onLogout();
 	}
 
     handleSubmit(e) {
