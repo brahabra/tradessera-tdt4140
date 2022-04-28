@@ -10,10 +10,22 @@ class CreatePost extends React.Component {
 		this.state = {title: '', text: '', price: '', location: '', eventType: 'Kino'}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChangeTitle = this.handleChangeTitle.bind(this);
-		this.handleChangeText = this.handleChangeText.bind(this);
 		this.handleChangePrice = this.handleChangePrice.bind(this);
 		this.handleChangeLocation = this.handleChangeLocation.bind(this);
 		this.handleChangeEventType = this.handleChangeEventType.bind(this);
+		this.handleChangeDateOfEvent = this.handleChangeDateOfEvent.bind(this);
+		this.handleChangeTimeOfEvent = this.handleChangeTimeOfEvent.bind(this);
+		this.handleChangeComment = this.handleChangeComment.bind(this);
+	}
+
+	handleChangeTimeOfEvent(event) {
+		let {value} = event.target;
+		this.setState({timeOfEvent: value});
+	}
+
+	handleChangeDateOfEvent(event) {
+		let {value} = event.target;
+		this.setState({dateOfEvent: value});
 	}
 
 	handleChangeEventType(event) {
@@ -36,22 +48,27 @@ class CreatePost extends React.Component {
 		this.setState({title: value});
 	}
 
-	handleChangeText(event) {
+	handleChangeComment(event) {
 		let {value} = event.target;
-		this.setState({text: value});
+		this.setState({comment: value});
 	}
 
 	handleSubmit(e) {
 		e.preventDefault();
-		const newPost = {title: this.state.title, text: this.state.text, price: this.state.price, location: this.state.location, eventType: this.state.eventType, user: this.props.currentUser};
+		const newPost = {title: this.state.title, price: this.state.price, 
+		   location: this.state.location, eventType: this.state.eventType,
+		   dateOfEvent: this.state.dateOfEvent, timeOfEvent: this.state.timeOfEvent,
+		   comment: this.state.comment, user: this.props.currentUser};
 		this.props.onCreate(newPost);
 
 		// clear out the dialog's inputs
 		this.state.title = '';
-		this.state.text = '';
 		this.state.price = '';
 		this.state.location = '';
 		this.state.eventType = '';
+		this.state.dateOfEvent = '';
+		this.state.timeOfEvent = '';
+		this.state.comment = '';
 	}
 
 	render() {
@@ -87,6 +104,21 @@ class CreatePost extends React.Component {
 						<option value="Festival">Festival</option>
 						<option value="Annet">Annet</option>
 					</select>
+					<br></br>
+					<label>
+						<Input type="date" value={this.state.dateOfEvent} placeholder="Date of Event"
+							onChange={event => this.handleChangeDateOfEvent(event)}/>
+					</label>
+					<br></br>
+					<label>
+						<Input type="time" value={this.state.timeOfEvent} placeholder="Time of Event"
+							onChange={event => this.handleChangeTimeOfEvent(event)}/>
+					</label>
+					<br></br>
+					<label>
+						<Input type="text" value={this.state.comment} placeholder="Comment"
+							onChange={event => this.handleChangeComment(event)}/>
+					</label>
 					<br></br>
 					<Button onClick={this.handleSubmit}>Create</Button>
 				</Form>

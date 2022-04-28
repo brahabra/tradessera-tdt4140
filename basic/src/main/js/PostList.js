@@ -209,7 +209,6 @@ class Post extends React.Component {
 				this.props.onNavProfile(user);
 			}
         });
-
 	}
 
 	render() {
@@ -240,10 +239,12 @@ class Post extends React.Component {
 			<tr>
 				<td onClick={() => this.handleNavigate()}><Link to="/userProfile">{this.props.post.username}</Link></td>
 				<td>{this.props.post.title}</td>
-				<td>{this.props.post.text}</td>
 				<td>{this.props.post.price}</td>
 				<td>{this.props.post.location}</td>
 				<td>{this.props.post.eventType}</td>
+				<td>{this.props.post.dateOfEvent}</td>
+				<td>{this.props.post.timeOfEvent}</td>
+				<td>{this.props.post.comment}</td>
 				<td>{rating} / 10</td>
 				<td>{button}</td>
 			</tr>
