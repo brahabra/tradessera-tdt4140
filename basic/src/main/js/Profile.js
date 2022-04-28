@@ -9,12 +9,18 @@ class Profile extends React.Component {
         this.state = {bio: ''};
         this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChangeBio = this.handleChangeBio.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
         //const newUser = null;
     }
 
 	handleChangeBio(event) {
 		let {value} = event.target;
 		this.setState({bio: value});
+	}
+
+    handleDelete() {
+		this.props.onDeleteUser(this.props.currentUser);
+        this.props.onLogout();
 	}
 
     handleSubmit(e) {
@@ -50,6 +56,7 @@ class Profile extends React.Component {
                      onChange={event => this.handleChangeBio(event)}/>
                      <Button>Confirm</Button>
                 </Form>
+                <Button onClick={this.handleDelete}>Delete User</Button>
                 
             </div>
         )

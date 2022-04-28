@@ -26,11 +26,12 @@ export default class NavigatonBar extends React.Component {
             <>
             <Nav>
                 <NavMenu>
-                <NavBrand>
-                    <Navbar.Brand href="..">
+                <NavLink to='/' >
+                    <NavBrand>
                         Tradessera
-                    </Navbar.Brand>
-                </NavBrand>
+                    </NavBrand>
+                </NavLink>
+                
                 
                 <NavLink to='/posts' >Posts</NavLink>
                 <NavLink to='/createPost' >CreatePost</NavLink>
@@ -44,12 +45,4 @@ export default class NavigatonBar extends React.Component {
             </>
         )
     }
-    /*
-    <Link>
-                <Nav.Link href="..">Home</Nav.Link>
-                </Link>
-    <Link>
-                <Nav.Link href="users">Users</Nav.Link>
-                </Link>
-    */   
 }
