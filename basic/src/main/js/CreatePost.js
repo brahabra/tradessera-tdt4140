@@ -7,7 +7,7 @@ class CreatePost extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {title: '', price: '', location: '', eventType: '', dateOfEvent: '', timeOfEvent: '', comment: ''}
+		this.state = {title: '', text: '', price: '', location: '', eventType: 'Kino'}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChangeTitle = this.handleChangeTitle.bind(this);
 		this.handleChangePrice = this.handleChangePrice.bind(this);
@@ -84,7 +84,12 @@ class CreatePost extends React.Component {
 					</label>
 					<br></br>
 					<label>
-						<Input type="text" value={this.state.price} placeholder="Price"
+						<Input type="text" value={this.state.text} placeholder="Text"
+							onChange={event => this.handleChangeText(event)}/>
+					</label>
+					<br></br>
+					<label>
+						<Input type="number" value={this.state.price} placeholder="Price"
 							onChange={event => this.handleChangePrice(event)}/>
 					</label>
 					<br></br>
@@ -93,10 +98,12 @@ class CreatePost extends React.Component {
 							onChange={event => this.handleChangeLocation(event)}/>
 					</label>
 					<br></br>
-					<label>
-						<Input type="text" value={this.state.eventType} placeholder="Type of Event"
-							onChange={event => this.handleChangeEventType(event)}/>
-					</label>
+					Select type <select value={this.state.eventType} onChange={event => this.handleChangeEventType(event)}>
+						<option value="Kino">Kino</option>
+						<option value="Konsert">Konsert</option>
+						<option value="Festival">Festival</option>
+						<option value="Annet">Annet</option>
+					</select>
 					<br></br>
 					<label>
 						<Input type="date" value={this.state.dateOfEvent} placeholder="Date of Event"

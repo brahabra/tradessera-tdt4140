@@ -10,6 +10,7 @@ class UserProfile extends React.Component {
         this.state = {user: this.props.profileUser, rating: ""};
         this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChangeRating = this.handleChangeRating.bind(this);
+        this.handleReport = this.handleReport.bind(this);
     }
 
     handleChangeRating(event) {
@@ -38,11 +39,18 @@ class UserProfile extends React.Component {
         this.state.rating = '';  // clear out the dialog's inputs
 	}
 
+    handleReport() {
+        const report = ({reporter: this.props.currentUser.username, reported: this.props.profileUser.username});
+        this.props.onReport(report);
+        alert("User has been reported");
+    }
+
     render() {
 
 
         return (
-            <div>
+            <div className="container">
+                <Form onSubmit={this.handleSubmit}>
                 <h1>{this.props.profileUser.username}</h1>
                 Email: {this.props.profileUser.email}
                 <br></br>
@@ -50,11 +58,11 @@ class UserProfile extends React.Component {
                 <br></br>
                 Rating: {Math.floor(this.props.profileUser.rating/this.props.profileUser.numRating)} / 10
                 <br></br>
-                <Form onSubmit={this.handleSubmit}>
                     <Input type="number" value={this.state.rating} placeholder="Enter Rating"
                      onChange={event => this.handleChangeRating(event)}/>
                      <Button>Confirm</Button>
                 </Form>
+                <Button onClick={this.handleReport}>Report User</Button>
             </div>
         )
     }

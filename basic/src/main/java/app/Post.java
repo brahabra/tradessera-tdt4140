@@ -140,6 +140,14 @@ public class Post {
 		this.comment = comment;
 	}	
 
+	public boolean getClosed() {
+		return closed;
+	}
+
+	public void setClosed(boolean closed) {
+		this.closed = closed;
+	}	
+
 	@Override
 	public String toString() {
 		return "Post{" +
